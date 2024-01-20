@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bgforall"
+    android:orientation="vertical"
+    tools:context=".signup">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/dosisbold"
+            android:text="@string/uni"
+            android:textColor="#3C3C3C"
+            android:textSize="30sp" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:layout_width="339dp"
+            android:layout_height="158dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="-70dp"
+            android:rotation="180"
+            app:lottie_autoPlay="true"
+            app:lottie_colorFilter="@color/black"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/spload" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="-10dp"
+        android:fontFamily="@font/dosisbold"
+        android:text="@string/signup"
+        android:textColor="#3C3C3C"
+        android:textSize="40sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/msgsignup"
+        android:textColor="#828282"
+        android:textSize="13sp" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="350dp"
+        android:layout_height="55dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
+        app:cardBackgroundColor="#DEDEDE"
+        app:cardCornerRadius="22dp">
+
+        <EditText
+            android:layout_width="320dp"
+            android:layout_height="48dp"
+            android:layout_gravity="left"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="3dp"
+            android:background="@android:color/transparent"
+            android:hint="Full Name"
+            android:fontFamily="@font/dosismedium"
+            android:minHeight="48sp"
+            android:textColorHint="#996F6F6F"
+            android:textSize="15sp"/>
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="350dp"
+        android:layout_height="55dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        app:cardBackgroundColor="#DEDEDE"
+        app:cardCornerRadius="20dp">
+
+        <EditText
+            android:layout_width="320dp"
+            android:layout_height="48dp"
+            android:layout_gravity="left"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="3dp"
+            android:background="@android:color/transparent"
+            android:hint="Email"
+            android:fontFamily="@font/dosismedium"
+            android:minHeight="48sp"
+            android:textColorHint="#996F6F6F"
+            android:textSize="15sp" />
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="350dp"
+        android:layout_height="55dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="15dp"
+        app:cardBackgroundColor="#DEDEDE"
+        app:cardCornerRadius="20dp">
+
+        <EditText
+            android:layout_width="320dp"
+            android:layout_height="48dp"
+            android:layout_gravity="left"
+            android:layout_marginStart="17dp"
+            android:layout_marginTop="3dp"
+            android:fontFamily="@font/dosismedium"
+            android:background="@android:color/transparent"
+            android:hint="Password"
+            android:minHeight="48sp"
+            android:password="true"
+            android:textColorHint="#996F6F6F"
+            android:textSize="15sp" />
+    </androidx.cardview.widget.CardView>
+
+
+        <ImageButton
+            android:id="@+id/createac1"
+            android:layout_width="350dp"
+            android:layout_height="63dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="20dp"
+            android:contentDescription="signup_ button"
+            android:background="@android:color/transparent"
+            app:srcCompat="@drawable/signinupbut1" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="-53dp"
+            android:fontFamily="@font/dosisbold"
+            android:text="Create Account"
+            android:textColor="@color/white"
+            android:textSize="25sp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="25dp"
+        android:gravity="center">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/line"
+            android:layout_marginStart="0dp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Or"
+            android:layout_marginStart="10dp"
+            android:fontFamily="@font/dosismedium"
+            android:layout_marginEnd="-20dp"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="30dp"
+            android:src="@drawable/line"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="2dp"
+        android:background="@android:color/transparent"
+        android:drawableEnd="@drawable/google"
+        android:text="Sign Up with google"
+        android:fontFamily="@font/dosismedium"
+        android:textColor="#828282" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        android:gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Already have an account?"
+            android:fontFamily="@font/dosismedium"
+            android:textColor="#8D8D8D"/>
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/dosisbold"
+            android:text=" Click here"
+            android:textColor="#FF5A5F"/>
+    </LinearLayout>
+
+
+
+</LinearLayout>

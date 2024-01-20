@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">UniWares</string>
+    <string name="msgsplash">Made by Suhani and Ahinav</string>
+    <string name="welcomemsg">Welcome to UniWares</string>
+    <string name="signup">Sign Up</string>
+    <string name="msgsignup">Register with one of the following options</string>
+    <string name="uni">UniWares</string>
+</resources>
