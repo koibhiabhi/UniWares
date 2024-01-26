@@ -129,7 +129,6 @@
             android:textSize="15sp" />
     </androidx.cardview.widget.CardView>
 
-
     <ImageButton
         android:id="@+id/imageButton"
         android:layout_width="350dp"
@@ -137,9 +136,8 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="20dp"
         android:contentDescription="login_button"
-        app:srcCompat="@drawable/signinupbut1"
+        app:srcCompat="@drawable/signupbtn"
         android:background="@android:color/transparent"/>
-
 
         <TextView
             android:layout_width="wrap_content"
@@ -150,7 +148,6 @@
             android:text="Login"
             android:textColor="@color/white"
             android:textSize="25sp" />
-
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -175,8 +172,5 @@
             android:textColor="#FF5A5F"/>
 
     </LinearLayout>
-
-
-
 
 </LinearLayout>
