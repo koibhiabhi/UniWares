@@ -29,9 +29,6 @@ public class login extends AppCompatActivity {
         btn = findViewById(R.id.imageButton);
 
 
-//        int flag = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN  | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
-//        getWindow().getDecorView().setSystemUiVisibility(flag);
-
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -48,7 +45,7 @@ public class login extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(login.this, signup.class));
-
+                finish();
             }
         });
 

@@ -93,7 +93,7 @@
             android:layout_marginStart="17dp"
             android:layout_marginTop="3dp"
             android:background="@android:color/transparent"
-            android:hint="Email"
+            android:hint ="Email"
             android:fontFamily="@font/dosismedium"
             android:minHeight="48sp"
             android:textColorHint="#996F6F6F"
@@ -182,7 +182,7 @@
         android:drawableEnd="@drawable/google"
         android:text="Sign Up with google"
         android:fontFamily="@font/dosismedium"
-        android:textColor="#828282" />
+        android:textColor="#828282"/>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -197,7 +197,6 @@
             android:text="Already have an account?"
             android:fontFamily="@font/dosismedium"
             android:textColor="#8D8D8D"/>
-
 
         <TextView
             android:id="@+id/click"
