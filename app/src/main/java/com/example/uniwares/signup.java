@@ -122,5 +122,6 @@ public class signup extends AppCompatActivity {
 }
 
 //abhi name wala aur karna hai abhi ki user ki emial and pwd ke saath name kaise save hoga DB mein
+//toh usse name bhi aa jayega
 
 
