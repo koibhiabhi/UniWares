@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "742094229582",
+    "project_id": "uniwares",
+    "storage_bucket": "uniwares.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:742094229582:android:96afd39cc2e8b89627b31f",
+        "android_client_info": {
+          "package_name": "com.example.uniwares"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD180TmLM225yWK4xP9bMFEf01oQjb8Xwg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
