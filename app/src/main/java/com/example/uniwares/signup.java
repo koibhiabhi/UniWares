@@ -4,14 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.Toast;
 
 public class signup extends AppCompatActivity {
 
-    ImageButton cab;
+    ImageButton signup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,19 +21,16 @@ public class signup extends AppCompatActivity {
 //        getWindow().getDecorView().setSystemUiVisibility(flag);
 
 
-        cab = findViewById(R.id.createac1);
+        signup = findViewById(R.id.createac1);
 
 //        Button cabb = (Button) cab;
 
         Intent cabl = new Intent(getApplicationContext(), login.class);
 
-        cab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(getApplicationContext(), "Account created, login with your credentials", Toast.LENGTH_LONG).show();
-                startActivity(cabl);
-                finish();
-            }
+        signup.setOnClickListener(view -> {
+            Toast.makeText(getApplicationContext(), "Account created, login with your credentials", Toast.LENGTH_LONG).show();
+            startActivity(cabl);
+            finish();
         });
 
 
