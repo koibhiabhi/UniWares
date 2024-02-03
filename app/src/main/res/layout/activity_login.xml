@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,88 +9,113 @@
     android:orientation="vertical">
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
         android:gravity="right"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.042">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="30dp"
             android:fontFamily="@font/dosisbold"
             android:text="@string/uni"
-            android:layout_marginEnd="30dp"
             android:textColor="#3C3C3C"
             android:textSize="30sp" />
-
     </LinearLayout>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="70dp"
         android:fontFamily="@font/dosisbold"
         android:text="Login"
         android:textColor="#3C3C3C"
-        android:textSize="40sp" />
+        android:textSize="40sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.092"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.248" />
 
     <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="12dp"
+        android:layout_width="233dp"
+        android:layout_height="20dp"
         android:text="Login with one of the following options"
         android:textColor="#828282"
-        android:textSize="13sp" />
+        android:textSize="13sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.16"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.322" />
 
     <Button
         android:id="@+id/login_google_btn"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:layout_gravity="center"
-        android:layout_marginTop="10dp"
         android:background="@android:color/transparent"
         android:drawableEnd="@drawable/google"
         android:fontFamily="@font/dosismedium"
         android:text="Sign in with google"
-        android:textColor="#828282" />
+        android:textColor="#828282"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.374" />
 
     <LinearLayout
+        android:id="@+id/linearLayout5"
         android:layout_width="match_parent"
         android:layout_height="30dp"
+        android:gravity="center"
         android:orientation="horizontal"
-        android:layout_marginTop="10dp"
-        android:gravity="center">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.445">
+
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/line"
-            android:layout_marginStart="0dp"/>
+            android:layout_marginStart="0dp"
+            android:src="@drawable/line" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Or"
             android:layout_marginStart="10dp"
-            android:layout_marginEnd="-20dp"/>
+            android:layout_marginEnd="-20dp"
+            android:text="Or" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="30dp"
-            android:src="@drawable/line"/>
+            android:src="@drawable/line" />
     </LinearLayout>
-
 
     <androidx.cardview.widget.CardView
         android:layout_width="350dp"
         android:layout_height="55dp"
         android:layout_gravity="center"
-        android:layout_marginTop="15dp"
+        android:layout_marginBottom="4dp"
         app:cardBackgroundColor="#DEDEDE"
-        app:cardCornerRadius="20dp">
+        app:cardCornerRadius="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/cardView5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.508"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout5">
 
         <EditText
             android:id="@+id/Edmail"
@@ -100,20 +125,25 @@
             android:layout_marginStart="17dp"
             android:layout_marginTop="3dp"
             android:background="@android:color/transparent"
-            android:hint="Email"
             android:fontFamily="@font/dosismedium"
+            android:hint="Email"
             android:minHeight="48sp"
             android:textColorHint="#996F6F6F"
             android:textSize="15sp" />
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView5"
         android:layout_width="350dp"
         android:layout_height="55dp"
         android:layout_gravity="center"
-        android:layout_marginTop="15dp"
         app:cardBackgroundColor="#DEDEDE"
-        app:cardCornerRadius="20dp">
+        app:cardCornerRadius="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.616">
 
         <EditText
             android:id="@+id/Edpass"
@@ -123,8 +153,8 @@
             android:layout_marginStart="17dp"
             android:layout_marginTop="3dp"
             android:background="@android:color/transparent"
-            android:hint="Password"
             android:fontFamily="@font/dosismedium"
+            android:hint="Password"
             android:minHeight="48sp"
             android:password="true"
             android:textColorHint="#996F6F6F"
@@ -135,36 +165,47 @@
         android:id="@+id/imageButton"
         android:layout_width="350dp"
         android:layout_height="63dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="20dp"
+        android:background="@android:color/transparent"
         android:contentDescription="login_button"
-        app:srcCompat="@drawable/signupbtn"
-        android:background="@android:color/transparent"/>
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.732"
+        app:srcCompat="@drawable/signupbtn" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="-53dp"
-            android:fontFamily="@font/dosisbold"
-            android:text="Login"
-            android:textColor="@color/white"
-            android:textSize="25sp" />
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:fontFamily="@font/dosisbold"
+        android:text="Login"
+        android:textColor="@color/white"
+        android:textSize="25sp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageButton"
+        app:layout_constraintEnd_toEndOf="@+id/imageButton"
+        app:layout_constraintStart_toStartOf="@+id/imageButton"
+        app:layout_constraintTop_toTopOf="@+id/imageButton" />
 
     <LinearLayout
+        android:id="@+id/linearLayout4"
         android:layout_width="match_parent"
         android:layout_height="30dp"
+        android:gravity="center"
         android:orientation="horizontal"
-        android:layout_marginTop="30dp"
-        android:gravity="center">
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButton"
+        app:layout_constraintVertical_bias="0.081"
+        tools:layout_editor_absoluteX="-16dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Don't have an account?"
             android:fontFamily="@font/dosismedium"
-            android:textColor="#8D8D8D"/>
-
+            android:text="Don't have an account?"
+            android:textColor="#8D8D8D" />
 
         <TextView
             android:id="@+id/signup"
@@ -172,8 +213,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/dosisbold"
             android:text=" Sign Up"
-            android:textColor="#FF5A5F"/>
-
+            android:textColor="#FF5A5F" />
     </LinearLayout>
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
