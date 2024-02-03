@@ -43,7 +43,7 @@
         android:fontFamily="@font/dosisbold"
         android:text="@string/signup"
         android:textColor="#3C3C3C"
-        android:textSize="40sp" />
+        android:textSize="40sp"/>
 
     <TextView
         android:layout_width="wrap_content"

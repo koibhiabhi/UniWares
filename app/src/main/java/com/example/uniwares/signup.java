@@ -33,6 +33,14 @@ public class signup extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        // Checks if the user is already loggend in
+        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
+            startActivity(new Intent(this, home.class));
+            finish();
+            return;
+        }
+
         setContentView(R.layout.activity_signup);
 
         edName = findViewById(R.id.Fname);

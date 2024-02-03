@@ -26,14 +26,11 @@ public class splash extends AppCompatActivity {
         Animation scalinglogo = AnimationUtils.loadAnimation(this, R.anim.splash_scale);
         i1.startAnimation(scalinglogo);
 
-//        int flag = View.SYSTEM_UI_FLAG_FULLSCREEN  | View.SYSTEM_UI_FLAG_FULLSCREEN;
-//        getWindow().getDecorView().setSystemUiVisibility(flag);
-
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
 
-                Intent splashsc = new Intent(splash.this, signup.class);
+                Intent splashsc = new Intent(splash.this, login.class);
                 startActivity(splashsc);
                 finish();
             }
