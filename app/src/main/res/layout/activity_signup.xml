@@ -8,7 +8,6 @@
     android:orientation="vertical"
     tools:context=".signup">
 
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,12 +24,12 @@
             android:fontFamily="@font/dosisbold"
             android:text="@string/uni"
             android:textColor="#3C3C3C"
-            android:textSize="30sp" />
+            android:textSize="@dimen/_25ssp" />
 
         <com.airbnb.lottie.LottieAnimationView
             android:id="@+id/animationView"
-            android:layout_width="339dp"
-            android:layout_height="158dp"
+            android:layout_width="@dimen/_260sdp"
+            android:layout_height="@dimen/_125sdp"
             android:layout_gravity="center"
             android:layout_marginTop="-70dp"
             android:rotation="180"
@@ -47,21 +46,21 @@
         android:layout_height="wrap_content"
         android:text="@string/msgsignup"
         android:textColor="#828282"
-        android:textSize="13sp"
+        android:textSize="@dimen/_10ssp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.178"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.287" />
+        app:layout_constraintVertical_bias="0.293" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="350dp"
-        android:layout_height="55dp"
+        android:layout_width="@dimen/_270sdp"
+        android:layout_height="@dimen/_45sdp"
+        app:cardCornerRadius="@dimen/_15sdp"
         android:layout_gravity="center"
         app:cardBackgroundColor="#DEDEDE"
-        app:cardCornerRadius="22dp"
         app:layout_constraintBottom_toTopOf="@+id/cardView3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
@@ -71,11 +70,11 @@
 
         <EditText
             android:id="@+id/Fname"
-            android:layout_width="320dp"
-            android:layout_height="48dp"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="@dimen/_40sdp"
             android:layout_gravity="left"
-            android:layout_marginStart="17dp"
-            android:layout_marginTop="3dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginTop="5dp"
             android:background="@android:color/transparent"
             android:fontFamily="@font/dosismedium"
             android:hint="Full Name"
@@ -87,11 +86,11 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView3"
-        android:layout_width="350dp"
-        android:layout_height="55dp"
+        android:layout_width="@dimen/_270sdp"
+        android:layout_height="@dimen/_45sdp"
+        app:cardCornerRadius="@dimen/_15sdp"
         android:layout_gravity="center"
         app:cardBackgroundColor="#DEDEDE"
-        app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toTopOf="@+id/cardView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.508"
@@ -101,10 +100,10 @@
 
         <EditText
             android:id="@+id/fmail"
-            android:layout_width="320dp"
-            android:layout_height="48dp"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="@dimen/_40sdp"
             android:layout_gravity="left"
-            android:layout_marginStart="17dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="3dp"
             android:background="@android:color/transparent"
             android:fontFamily="@font/dosismedium"
@@ -116,11 +115,11 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
-        android:layout_width="350dp"
-        android:layout_height="55dp"
+        android:layout_width="@dimen/_270sdp"
+        android:layout_height="@dimen/_45sdp"
+        app:cardCornerRadius="@dimen/_15sdp"
         android:layout_gravity="center"
         app:cardBackgroundColor="#DEDEDE"
-        app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.508"
@@ -130,10 +129,10 @@
 
         <EditText
             android:id="@+id/pass1"
-            android:layout_width="320dp"
-            android:layout_height="48dp"
+            android:layout_width="@dimen/_250sdp"
+            android:layout_height="@dimen/_40sdp"
             android:layout_gravity="left"
-            android:layout_marginStart="17dp"
+            android:layout_marginStart="15dp"
             android:layout_marginTop="3dp"
             android:background="@android:color/transparent"
             android:fontFamily="@font/dosismedium"
@@ -146,8 +145,8 @@
 
     <ImageButton
         android:id="@+id/createac1"
-        android:layout_width="350dp"
-        android:layout_height="63dp"
+        android:layout_width="@dimen/_270sdp"
+        android:layout_height="@dimen/_43sdp"
         android:background="@android:color/transparent"
         android:contentDescription="signup_ button"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -166,7 +165,7 @@
         android:fontFamily="@font/dosisbold"
         android:text="Create Account"
         android:textColor="@color/white"
-        android:textSize="25sp"
+        android:textSize="@dimen/_20ssp"
         app:layout_constraintBottom_toBottomOf="@+id/createac1"
         app:layout_constraintEnd_toEndOf="@+id/createac1"
         app:layout_constraintStart_toStartOf="@+id/createac1"
@@ -186,40 +185,40 @@
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="0dp"
             android:src="@drawable/line" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:layout_marginEnd="-20dp"
+            android:layout_marginStart="@dimen/_10sdp"
             android:fontFamily="@font/dosismedium"
             android:text="Or" />
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="@dimen/_10sdp"
             android:src="@drawable/line" />
     </LinearLayout>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/login_google_btn"
         android:layout_width="wrap_content"
-        android:layout_height="48dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@android:color/transparent"
         android:drawableEnd="@drawable/google"
         android:fontFamily="@font/dosismedium"
-        android:text="Sign Up with google"
+        android:text="Sign in with google"
         android:textColor="#828282"
+        android:textSize="@dimen/_10sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.816" />
+        app:layout_constraintVertical_bias="0.816"
+        tools:ignore="TextSizeCheck" />
 
     <LinearLayout
         android:id="@+id/linearLayout2"
@@ -237,6 +236,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/dosismedium"
             android:text="Already have an account?"
+            android:textSize="@dimen/_11ssp"
             android:textColor="#8D8D8D" />
 
         <TextView
@@ -245,7 +245,8 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/dosisbold"
             android:text=" Click here"
-            android:textColor="#FF5A5F" />
+            android:textColor="#FF5A5F"
+            android:textSize="@dimen/_12ssp" />
     </LinearLayout>
 
     <TextView
@@ -254,12 +255,12 @@
         android:fontFamily="@font/dosisbold"
         android:text="@string/signup"
         android:textColor="#3C3C3C"
-        android:textSize="40sp"
+        android:textSize="@dimen/_27ssp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.103"
+        app:layout_constraintHorizontal_bias="0.098"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.206" />
+        app:layout_constraintVertical_bias="0.224" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

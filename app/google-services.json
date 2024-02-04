@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "742094229582",
+    "firebase_url": "https://uniwares-default-rtdb.firebaseio.com",
     "project_id": "uniwares",
     "storage_bucket": "uniwares.appspot.com"
   },
@@ -12,7 +13,12 @@
           "package_name": "com.example.uniwares"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "742094229582-cklrifhqgq60f3mosnpoqp3dj2vdtn2l.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyD180TmLM225yWK4xP9bMFEf01oQjb8Xwg"
@@ -20,7 +26,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "742094229582-cklrifhqgq60f3mosnpoqp3dj2vdtn2l.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }
