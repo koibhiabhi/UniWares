@@ -22,7 +22,6 @@ public class splash extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
         i1 = findViewById(R.id.logo);
-
         Animation scalinglogo = AnimationUtils.loadAnimation(this, R.anim.splash_scale);
         i1.startAnimation(scalinglogo);
 

@@ -209,6 +209,7 @@
         android:background="@android:color/transparent"
         android:drawableEnd="@drawable/google"
         android:fontFamily="@font/dosismedium"
+        android:onClick="logingoo"
         android:text="Sign in with google"
         android:textColor="#828282"
         android:textSize="@dimen/_10sdp"

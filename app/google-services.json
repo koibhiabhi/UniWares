@@ -15,6 +15,22 @@
       },
       "oauth_client": [
         {
+          "client_id": "742094229582-5r66jhl9bm7k8asedq66g63uom1kbrmj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.uniwares",
+            "certificate_hash": "6f37536763bca55d132ffd60bb20467f476d2c87"
+          }
+        },
+        {
+          "client_id": "742094229582-qa2m3i18e0tdm6ttt68lnlbeqk7cp2mn.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.uniwares",
+            "certificate_hash": "bd9c44ef9d41e31d0dc0b94b1988a718f6832806"
+          }
+        },
+        {
           "client_id": "742094229582-cklrifhqgq60f3mosnpoqp3dj2vdtn2l.apps.googleusercontent.com",
           "client_type": 3
         }
