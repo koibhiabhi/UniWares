@@ -1,9 +1,12 @@
 <resources>
     <string name="app_name">UniWares</string>
-    <string name="msgsplash">Made by Suhani and Ahinav</string>
+    <string name="msgsplash">Made by Suhani and Abhinav</string>
     <string name="welcomemsg">Welcome to UniWares</string>
     <string name="signup">Sign Up</string>
     <string name="msgsignup">Register with one of the following options</string>
     <string name="uni">UniWares</string>
     <string name="default_web_client_id">742094229582-5r66jhl9bm7k8asedq66g63uom1kbrmj.apps.googleusercontent.com</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="navigation_drawer_open">Open Navigation Drawer</string>
+    <string name="navigation_drawer_close">Close Navigation Drawer</string>
 </resources>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="BottomNavigation">
+        <item name="android:background">#FFFFFF</item>
+        <item name="itemBackground">@drawable/bg_bottom_nav_item</item>
+        <item name="itemIconTint">#999999</item>
+        <item name="itemTextColor">#999999</item>
+    </style>
+
+    <style name="Widget.BottomNavigationView" parent="@style/Widget.MaterialComponents.BottomNavigationView">
+        <item name="android:background">@color/white</item>
+        <item name="itemBackground">@android:color/transparent</item>
+        <item name="itemIconTint">@drawable/selector_btm_nav_icon_tint</item>
+    </style>
+</resources>

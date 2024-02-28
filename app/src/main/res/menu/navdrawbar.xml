@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:title="My Account"
+        android:icon="@drawable/person"
+        android:id="@+id/account"/>
+
+    <item
+        android:title="My Orders"
+        android:icon="@drawable/shop"
+        android:id="@+id/order"/>
+
+    <item
+        android:title="My Listings"
+        android:icon="@drawable/listing"
+        android:id="@+id/listing"/>
+
+    <item
+        android:title="Donate Items"
+        android:icon="@drawable/donate"
+        android:id="@+id/donate"/>
+
+</menu>

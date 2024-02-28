@@ -1,10 +1,6 @@
 package com.example.uniwares;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
@@ -16,7 +12,10 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
-//import com.example.uniwares.Models.Users;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -28,7 +27,11 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
-//import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import java.util.HashMap;
+import java.util.Map;
+
 
 public class signup extends AppCompatActivity {
 
@@ -39,19 +42,14 @@ public class signup extends AppCompatActivity {
     GoogleSignInClient client;
     boolean doubleBackToExitPressedOnce = false;
 
+    FirebaseDatabase database;
+    DatabaseReference usersRef;
 
-    @SuppressLint("MissingInflatedId")
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // Checks if the user is already loggend in
-        if (FirebaseAuth.getInstance().getCurrentUser() != null) {
-            startActivity(new Intent(this, home.class));
-            finish();
-            return;
-        }
-
         setContentView(R.layout.activity_signup);
 
         edName = findViewById(R.id.Fname);
@@ -59,7 +57,9 @@ public class signup extends AppCompatActivity {
         edPwd = findViewById(R.id.pass1);
         tv = findViewById(R.id.click);
         cab = findViewById(R.id.createac1);
-        signupAuth = FirebaseAuth.getInstance(); // initialising FAuth
+        signupAuth = FirebaseAuth.getInstance();
+        database = FirebaseDatabase.getInstance();
+        usersRef = database.getReference("Users");
 
         GoogleSignInOptions options = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -81,19 +81,15 @@ public class signup extends AppCompatActivity {
         cab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                String username = edName.getText().toString();
                 String mail = edMail.getText().toString();
                 String pass = edPwd.getText().toString();
+                String username = edName.getText().toString().trim();
 
                 if (username.length() == 0 || pass.length() == 0 || mail.length() == 0) {
                     Toast.makeText(signup.this, "Please fill all the details", Toast.LENGTH_SHORT).show();
                 } else {
                     if (isValid(pass)) {
-                        register(mail, pass); // agar details valid hai toh register funtion mein email and pwd
-                        Toast.makeText(signup.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
-                        startActivity(cabl);
-                        finish();
+                        register(username, mail, pass);
                     } else {
                         Toast.makeText(signup.this, "Password must be 8 characters with at least one uppercase letter and a special character.", Toast.LENGTH_SHORT).show();
                     }
@@ -127,25 +123,42 @@ public class signup extends AppCompatActivity {
         }
     }
 
-    public void register(String mail, String pass) {
+    public void register(String username, String mail, String pass) {
         signupAuth.createUserWithEmailAndPassword(mail, pass).addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if (task.isSuccessful()) {
-                    try {
-                        Toast.makeText(signup.this, "Registration Successful", Toast.LENGTH_LONG).show();
-                    } catch (Exception e) {
-                        Log.e("FirebaseError", "Exception during registration: " + e.getMessage(), e);
-                    }
+                    String userId = task.getResult().getUser().getUid();
+
+                    Map<String, Object> userData = new HashMap<>();
+                    userData.put("userId", userId); // Store the user ID
+                    userData.put("username", username);
+                    userData.put("email", mail);
+                    userData.put("password", pass);
+
+                    usersRef.child(userId).setValue(userData)
+                            .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if (task.isSuccessful()) {
+                                        Toast.makeText(signup.this, "Registration Successful", Toast.LENGTH_SHORT).show();
+                                        startActivity(new Intent(signup.this, home.class));
+                                        finish();
+                                    } else {
+                                        Toast.makeText(signup.this, "Failed to store user data", Toast.LENGTH_SHORT).show();
+                                        Log.e("FirebaseError", "Error storing user data: " + task.getException().getMessage());
+                                    }
+                                }
+                            });
                 } else {
-                    Exception exception = task.getException();
-                    Log.e("FirebaseError", "Registration Failed: " + exception.getMessage(), exception);
-                    Toast.makeText(signup.this, "Registration Failed: " + exception.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(signup.this, "Registration Failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.e("FirebaseError", "Registration Failed: " + task.getException().getMessage());
                 }
             }
         });
     }
 
+    // Method for Google Sign-In
     public void logingoo(View view) {
         Intent i = client.getSignInIntent();
         startActivityForResult(i, 1234);
@@ -168,19 +181,15 @@ public class signup extends AppCompatActivity {
                                 if(task.isSuccessful()){
                                     Intent in = new Intent(getApplicationContext(), home.class);
                                     startActivity(in);
-
                                 } else {
                                     Toast.makeText(signup.this, task.getException().getMessage(), Toast.LENGTH_SHORT ).show();
                                 }
-
                             }
                         });
             } catch (ApiException e) {
                 throw new RuntimeException(e);
             }
         }
-
-
     }
 
     @Override
@@ -194,7 +203,6 @@ public class signup extends AppCompatActivity {
         Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
 
         new Handler(Looper.getMainLooper()).postDelayed(new Runnable() {
-
             @Override
             public void run() {
                 doubleBackToExitPressedOnce=false;
@@ -202,6 +210,7 @@ public class signup extends AppCompatActivity {
         }, 2000);
     }
 }
+
 
 
 

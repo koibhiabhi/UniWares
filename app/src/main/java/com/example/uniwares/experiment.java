@@ -14,8 +14,6 @@ public class experiment extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_experiment);
 
-
-
-
+        
     }
 }
