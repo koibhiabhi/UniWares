@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-
+    android:background="#FFFFFF"
     tools:context=".Fragments.chat_frag">
 
     <!-- TODO: Update blank fragment layout -->
@@ -15,12 +15,15 @@
         android:id="@+id/tb1"
         android:layout_width="match_parent"
         android:layout_height="56dp"
+        android:background="@color/white"
+        app:tabIndicatorAnimationMode="fade"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="1dp"/>
 
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/vp1"
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

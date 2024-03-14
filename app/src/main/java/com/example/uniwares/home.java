@@ -28,6 +28,7 @@ import com.example.uniwares.Fragments.explore_frag;
 import com.example.uniwares.Fragments.home_frag;
 import com.example.uniwares.Fragments.listing;
 import com.example.uniwares.Fragments.order;
+import com.example.uniwares.Fragments.redeemcoins;
 import com.example.uniwares.Fragments.transact_frag;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
@@ -160,7 +161,7 @@ public class home extends AppCompatActivity implements NavigationView.OnNavigati
         } else if (id ==R.id.listing) {
             loadFrag(new listing(), false);
         } else {
-            loadFrag(new donate_frag(), false);
+            loadFrag(new redeemcoins(), false);
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);

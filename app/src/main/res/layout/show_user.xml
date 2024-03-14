@@ -3,16 +3,18 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="120dp"
+    android:layout_height="95dp"
     android:paddingTop="7dp"
     android:paddingBottom="-5dp"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
         android:layout_width="@dimen/_295sdp"
-        android:layout_height="@dimen/_80sdp"
+        android:layout_height="@dimen/_65sdp"
+        android:layout_marginTop="1dp"
         android:layout_marginLeft="14.2dp"
         app:cardBackgroundColor="@color/white"
+        android:elevation="0dp"
         app:cardCornerRadius="15dp">
 
         <LinearLayout
@@ -22,9 +24,10 @@
             <de.hdodenhof.circleimageview.CircleImageView
                 xmlns:app="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/profile_image"
-                android:layout_width="90dp"
-                android:layout_height="90dp"
-                android:layout_margin="8dp"
+                android:layout_width="65dp"
+                android:layout_height="65dp"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginTop="10dp"
                 android:src="@drawable/logo"
                 app:civ_border_color="#3C222020"
                 app:civ_border_width="0.5dp" />
@@ -37,27 +40,25 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/userName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Abhinav Jain"
-                android:layout_marginTop="@dimen/_23sdp"
-                android:textStyle="bold"
-                android:id="@+id/userName"
-                android:textSize="@dimen/_14ssp"
-                android:layout_marginStart="130dp"/>
+                android:layout_marginStart="105dp"
+                android:layout_marginTop="@dimen/_21sdp"
+                android:text="Loading Users"
+                android:textSize="@dimen/_15ssp"
+                android:fontFamily="@font/instagramsansbold" />
 
             <TextView
                 android:id="@+id/lastMessage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="130dp"
+                android:layout_marginStart="100dp"
                 android:layout_marginTop="5dp"
-                android:text="Last Message"
-                android:textSize="@dimen/_10sdp"
-                 />
+                android:text=""
+                android:textSize="@dimen/_10sdp"/>
 
         </LinearLayout>
-
     </androidx.cardview.widget.CardView>
 
 </LinearLayout>

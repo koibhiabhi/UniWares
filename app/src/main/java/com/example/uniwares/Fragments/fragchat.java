@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.uniwares.Adapters.UserAdapter;
 import com.example.uniwares.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -45,9 +46,10 @@ public class fragchat extends Fragment {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         userList.clear();
+                        String currentUserID = FirebaseAuth.getInstance().getCurrentUser().getUid();
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             Map<String, String> userData = (Map<String, String>) snapshot.getValue();
-                            if (userData != null) {
+                            if (userData != null && !snapshot.getKey().equals(currentUserID)) {
                                 userList.add(userData);
                             }
                         }
@@ -59,6 +61,7 @@ public class fragchat extends Fragment {
                         // Handle onCancelled event
                     }
                 });
+
 
         return view;
     }

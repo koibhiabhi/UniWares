@@ -1,0 +1,345 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:scrollbars="none"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragments.donation_details">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+
+        <TextView
+            android:id="@+id/text_enter_details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/instagramsansmedium"
+            android:text="Enter Donation details:"
+            android:textSize="@dimen/_22ssp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Please fill all the details"
+            android:textSize="@dimen/_10ssp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_enter_details"
+            app:layout_constraintVertical_bias="0.01" />
+
+        <RadioGroup
+            android:id="@+id/category_radio_group"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            android:layout_marginTop="100dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="-20dp"
+                android:src="@drawable/book" />
+
+            <RadioButton
+                android:id="@+id/radio_books"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-50dp"
+                android:layout_marginTop="30dp" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="-20dp"
+                android:src="@drawable/shirt" />
+
+            <RadioButton
+                android:id="@+id/radio_clothes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-50dp"
+                android:layout_marginTop="30dp"
+                android:checked="true" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="-20dp"
+                android:src="@drawable/diet" />
+
+            <RadioButton
+                android:id="@+id/radio_food"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-55dp"
+                android:layout_marginTop="30dp"
+                android:checked="true" />
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="35dp"
+                android:layout_marginTop="-20dp"
+                android:src="@drawable/other" />
+
+            <RadioButton
+                android:id="@+id/radio_others"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="-50dp"
+                android:layout_marginTop="30dp"
+                android:checked="true" />
+
+        </RadioGroup>
+
+        <LinearLayout
+            android:id="@+id/full"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.358"
+            tools:layout_editor_absoluteX="0dp">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_25sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:text="Name:"
+                android:textColor="#DF151515"
+                android:textSize="@dimen/_13ssp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/ll1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/doner"
+                    android:layout_width="353dp"
+                    android:layout_height="@dimen/_37sdp"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="3dp"
+                    android:backgroundTint="@color/edpro"
+                    android:hint="Enter new name, eg. John Doe"
+                    android:textSize="@dimen/_12ssp"
+                    app:cornerRadius="@dimen/_9sdp"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_25sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="Phone Numer:"
+                android:textColor="#DF151515"
+                android:textSize="@dimen/_13ssp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/ll2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/pickphone"
+                    android:layout_width="353dp"
+                    android:layout_height="@dimen/_37sdp"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="3dp"
+                    android:backgroundTint="@color/edpro"
+                    android:hint="Enter your phone number, eg. +91-8888222211"
+                    android:textSize="@dimen/_10ssp"
+                    app:cornerRadius="@dimen/_9sdp"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_25sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="Pickup Address:"
+                android:textColor="#DF151515"
+                android:textSize="@dimen/_13ssp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/ll3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/pickaddress"
+                    android:layout_width="@dimen/_270sdp"
+                    android:layout_height="@dimen/_37sdp"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="3dp"
+                    android:backgroundTint="@color/edpro"
+                    android:hint="Enter your address"
+                    android:textSize="@dimen/_12ssp"
+                    app:cornerRadius="@dimen/_9sdp"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_25sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="Pickup Date:"
+                android:textColor="#DF151515"
+                android:textSize="@dimen/_13ssp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/ll4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/pickdate"
+                    android:layout_width="@dimen/_270sdp"
+                    android:layout_height="@dimen/_37sdp"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="3dp"
+                    android:backgroundTint="@color/edpro"
+                    android:hint="Enter pickup date, eg DD-MM-YY"
+                    android:inputType="date"
+                    android:textSize="@dimen/_12ssp"
+                    app:cornerRadius="@dimen/_9sdp"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+            </LinearLayout>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_25sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="Description about the donation:"
+                android:textColor="#DF151515"
+                android:textSize="@dimen/_13ssp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:id="@+id/ll6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <EditText
+                    android:id="@+id/description"
+                    android:layout_width="@dimen/_270sdp"
+                    android:layout_height="@dimen/_37sdp"
+                    android:layout_marginStart="25dp"
+                    android:layout_marginTop="3dp"
+                    android:backgroundTint="@color/edpro"
+                    android:hint="Wrtie few lines"
+                    android:textSize="@dimen/_12ssp"
+                    app:cornerRadius="@dimen/_9sdp"
+                    tools:ignore="SpeakableTextPresentCheck" />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/request"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="-48.5dp"
+            android:backgroundTint="@color/edpro"
+            android:text="Submit Request"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/_12ssp"
+            app:cornerRadius="@dimen/_9sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.85"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addimg" />
+
+        <Button
+            android:id="@+id/addimg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/edpro"
+            android:text="Add Image"
+            android:drawableLeft="@drawable/addimg"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/_12ssp"
+            app:cornerRadius="@dimen/_9sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/full" />
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager"
+            android:layout_width="350dp"
+            android:layout_height="170dp"
+            tools:layout_editor_absoluteX="1dp"
+            tools:layout_editor_absoluteY="602dp"
+            android:layout_marginTop="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/addimg"/>
+
+
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="5dp"
+            android:src="@drawable/box"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewPager"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </ScrollView>
+
+
+    <!-- Add EditTexts for user details here -->

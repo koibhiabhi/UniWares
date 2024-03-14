@@ -18,8 +18,8 @@
         android:id="@+id/listing"/>
 
     <item
-        android:title="Donate Items"
-        android:icon="@drawable/donate"
+        android:title="Rewards"
+        android:icon="@drawable/reward"
         android:id="@+id/donate"/>
 
 </menu>

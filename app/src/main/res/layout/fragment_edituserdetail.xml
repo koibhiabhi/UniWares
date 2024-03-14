@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".Fragments.edituserdetail">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="118dp"
+        android:layout_marginBottom="677dp"
+        android:fontFamily="@font/instagramsansmedium"
+        android:text="Edit Your Details"
+        android:textSize="@dimen/_20ssp" />
+
+
+    <LinearLayout
+        android:id="@+id/full"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="409dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.571"
+        tools:layout_editor_absoluteX="0dp">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:text="Name:"
+            android:textColor="#DF151515"
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/ll1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/neweditName"
+                android:layout_width="@dimen/_270sdp"
+                android:layout_height="@dimen/_37sdp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="3dp"
+                android:backgroundTint="@color/edpro"
+                android:hint="Enter new name, eg. John Doe"
+                android:textSize="@dimen/_12ssp"
+                app:cornerRadius="@dimen/_9sdp"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="Phone Numer:"
+            android:textColor="#DF151515"
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/ll2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/neweditph"
+                android:layout_width="@dimen/_270sdp"
+                android:layout_height="@dimen/_37sdp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="3dp"
+                android:backgroundTint="@color/edpro"
+                android:hint="Enter your phone number, eg. +91-8888222211"
+                android:textSize="@dimen/_10ssp"
+                app:cornerRadius="@dimen/_9sdp"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:text="Address:"
+            android:textColor="#DF151515"
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="bold" />
+
+        <LinearLayout
+            android:id="@+id/ll3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:id="@+id/neweditaddress"
+                android:layout_width="@dimen/_270sdp"
+                android:layout_height="@dimen/_37sdp"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="3dp"
+                android:backgroundTint="@color/edpro"
+                android:hint="Enter your address"
+                android:textSize="@dimen/_12ssp"
+                app:cornerRadius="@dimen/_9sdp"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/savebtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="134dp"
+        android:layout_marginBottom="313dp"
+        android:backgroundTint="@color/edpro"
+        android:text="Save Details"
+        android:textColor="@color/grey"
+        android:textSize="@dimen/_12ssp"
+        app:cornerRadius="@dimen/_9sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.445"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/full"
+        app:layout_constraintVertical_bias="0.509" />
+
+
+</RelativeLayout>

@@ -6,11 +6,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FFFFFF"
     tools:context=".chat_screen">
 
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chatsrnrecycler"
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/toolbar2"
@@ -20,8 +22,8 @@
         android:id="@+id/toolbar2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:minHeight="?attr/actionBarSize"
-        android:layout_marginTop="7dp"
         android:theme="?attr/actionBarTheme">
 
 
@@ -44,11 +46,9 @@
                 android:layout_height="50dp"
                 android:layout_margin="8dp"
                 android:src="@drawable/logo"
-                app:civ_border_color="#3C222020"
-                app:civ_border_width="2dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.113"
+                app:layout_constraintHorizontal_bias="0.139"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -56,13 +56,13 @@
                 android:id="@+id/username"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/dosisbold"
-                android:text="Abhinav Jain"
+                android:fontFamily="@font/instagramsansmedium"
+                android:text="Loading user"
                 android:textColor="@color/grey"
-                android:textSize="@dimen/_17ssp"
+                android:textSize="@dimen/_16ssp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.04"
+                app:layout_constraintHorizontal_bias="0.077"
                 app:layout_constraintStart_toEndOf="@+id/profile_image"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.512" />
@@ -73,10 +73,10 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.889"
+                app:layout_constraintHorizontal_bias="0.823"
                 app:layout_constraintStart_toEndOf="@+id/username"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.529"
+                app:layout_constraintVertical_bias="0.47"
                 app:srcCompat="@drawable/call" />
 
 
@@ -90,30 +90,30 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:background="@color/white"
         android:layout_alignParentBottom="true"
         android:padding="9dp">
 
         <EditText
             android:id="@+id/typedmsg"
-            android:layout_width="362dp"
-            android:layout_height="50dp"
+            android:layout_width="@dimen/_270sdp"
+            android:layout_height="45dp"
             android:ems="10"
             android:inputType="text"
             android:hint="Type Message"
             android:padding="8dp"
-            android:textColorHint="@color/grey"
+            android:textSize="@dimen/_12ssp"
             android:background="@drawable/sendmsgbox"
             />
 
         <ImageView
             android:id="@+id/sendbtn"
-            android:layout_width="38dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:padding="2dp"
             android:layout_gravity="center"
             app:srcCompat="@drawable/sendmsg" />
-
 
     </LinearLayout>
 

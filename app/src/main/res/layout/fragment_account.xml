@@ -11,55 +11,62 @@
     <!-- TODO: Update blank fragment layout -->
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingStart="@dimen/_2sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.047"
-        android:paddingStart="@dimen/_25sdp">
+        app:layout_constraintVertical_bias="0.025">
 
-        <Button
-            android:id="@+id/propic"
-            android:layout_width="75dp"
-            android:layout_height="85dp"
-            android:backgroundTint="@android:color/transparent"
-            app:cornerRadius="300dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:strokeColor="#000000"
-            app:strokeWidth="1dp"
-            tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profileimg"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/avatar"
+            android:layout_marginTop="@dimen/_6sdp"
+            app:civ_border_color="#3C222020"
+            app:civ_border_width="0.5dp" />
+
+        <ImageView
+            android:id="@+id/addprofileimg"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="@dimen/_minus20sdp"
+            android:layout_marginTop="@dimen/_63sdp"
+            android:src="@drawable/add" />
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:orientation="vertical"
-            android:padding="@dimen/_10sdp">
+            android:padding="@dimen/_10sdp"
+            android:paddingLeft="15dp">
 
             <TextView
+                android:id="@+id/namebold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_25sdp"
                 android:fontFamily="@font/dosisbold"
-                android:text="Suhani Gupta"
+                android:text="Loading.."
                 android:textColor="#FF5A5F"
                 android:textSize="@dimen/_19ssp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
 
             <TextView
                 android:id="@+id/empro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="suha******@gmail.com"
+                android:text="fetching"
                 android:textColor="#838383"
                 android:textSize="@dimen/_10ssp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -70,6 +77,7 @@
                 app:layout_constraintVertical_bias="0.107" />
 
         </LinearLayout>
+
 
     </LinearLayout>
 
@@ -115,7 +123,6 @@
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="3dp"
                 android:backgroundTint="@color/edpro"
-                android:drawableEnd="@drawable/edbtn"
                 app:cornerRadius="@dimen/_9sdp"
                 tools:ignore="SpeakableTextPresentCheck" />
 
@@ -125,7 +132,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="-340dp"
                 android:layout_marginTop="3dp"
-                android:text="Suhani Gutpa"
+                android:text="fetching details..."
                 android:textColor="#838383"
                 android:textSize="@dimen/_12ssp" />
         </LinearLayout>
@@ -152,7 +159,6 @@
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="3dp"
                 android:backgroundTint="@color/edpro"
-                android:drawableEnd="@drawable/edbtn"
                 app:cornerRadius="@dimen/_9sdp"
                 tools:ignore="SpeakableTextPresentCheck" />
 
@@ -162,7 +168,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="-340dp"
                 android:layout_marginTop="3dp"
-                android:text="suha******@gmail.com"
+                android:text="fetching details..."
                 android:textColor="#838383"
                 android:textSize="@dimen/_12ssp" />
 
@@ -190,7 +196,6 @@
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="3dp"
                 android:backgroundTint="@color/edpro"
-                android:drawableEnd="@drawable/edbtn"
                 app:cornerRadius="@dimen/_9sdp"
                 tools:ignore="SpeakableTextPresentCheck" />
 
@@ -200,7 +205,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="-340dp"
                 android:layout_marginTop="3dp"
-                android:text="+91-87*******3"
+                android:text="fetching details..."
                 android:textColor="#838383"
                 android:textSize="@dimen/_12ssp"/>
 
@@ -224,11 +229,10 @@
             <Button
                 android:id="@+id/addr"
                 android:layout_width="@dimen/_270sdp"
-                android:layout_height="@dimen/_87sdp"
+                android:layout_height="@dimen/_80sdp"
                 android:layout_marginStart="25dp"
                 android:layout_marginTop="3dp"
                 android:backgroundTint="@color/edpro"
-                android:drawableEnd="@drawable/edbtn"
                 app:cornerRadius="@dimen/_9sdp"
                 tools:ignore="SpeakableTextPresentCheck" />
 
@@ -237,8 +241,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="-340dp"
-                android:layout_marginTop="-33dp"
-                android:text="XYC, New york, US"
+                android:layout_marginTop="-28dp"
+                android:text="fetching details..."
                 android:textColor="#838383"
                 android:textSize="@dimen/_12ssp" />
 
@@ -258,5 +262,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.985" />
+
+    <Button
+        android:id="@+id/editbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="3dp"
+        android:backgroundTint="@color/edpro"
+        android:drawableEnd="@drawable/edbtn"
+        android:text="Edit Details"
+        android:textColor="@color/grey"
+        android:textSize="@dimen/_12ssp"
+        app:cornerRadius="@dimen/_9sdp"
+        app:layout_constraintBottom_toTopOf="@+id/textView5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.445"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/full"
+        app:layout_constraintVertical_bias="0.509"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

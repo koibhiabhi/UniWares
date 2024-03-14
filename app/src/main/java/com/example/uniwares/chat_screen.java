@@ -43,10 +43,10 @@ public class chat_screen extends AppCompatActivity {
 
         String recieveID = getIntent().getStringExtra("userId");
         String userName = getIntent().getStringExtra("username");
-        String profilePic = getIntent().getStringExtra("profilePicUrl");
+        String profilePic = getIntent().getStringExtra("profilepic");
 
         binding.username.setText(userName);
-        Picasso.get().load(profilePic).placeholder(R.drawable.logouni).into(binding.profileImage);
+        Picasso.get().load(profilePic).placeholder(R.drawable.avatar).into(binding.profileImage);
 
 
         binding.imageView.setOnClickListener(new View.OnClickListener() {
@@ -80,6 +80,8 @@ public class chat_screen extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
 
+
+
                         messageModels.clear();
                         for (DataSnapshot snap1 : snapshot.getChildren()) {
                             MessageModel model = snap1.getValue(MessageModel.class);
@@ -87,6 +89,9 @@ public class chat_screen extends AppCompatActivity {
                             messageModels.add(model);
                         }
                         chatAdapter.notifyDataSetChanged();
+                        layoutmanager.scrollToPosition(messageModels.size() - 1);
+
+
                     }
 
                     @Override
@@ -118,19 +123,13 @@ public class chat_screen extends AppCompatActivity {
                                     .setValue(model).addOnSuccessListener(new OnSuccessListener<Void>() {
                                         @Override
                                         public void onSuccess(Void aVoid) {
-
+                                            layoutmanager.scrollToPosition(messageModels.size() - 1);
                                         }
                                     });
                             }
                         });
-
-
             }
         });
-
-
-
-
 
     }
 }
