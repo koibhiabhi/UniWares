@@ -81,6 +81,9 @@ public class transact_frag extends Fragment {
         priceEt = view.findViewById(R.id.priceEt);
         titleEt = view.findViewById(R.id.titleEt);
         descriptionEt =  view.findViewById(R.id.descriptionEt);
+        postAdbtn = view.findViewById(R.id.postAdbtn);
+        firebaseAuth = FirebaseAuth.getInstance();
+        brandEt = view.findViewById(R.id.brandEt);
         adimgbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -88,14 +91,12 @@ public class transact_frag extends Fragment {
             }
         });
 
-        postAdbtn = view.findViewById(R.id.postAdbtn);
         postAdbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 validateData();
             }
         });
-
 
         ArrayAdapter<String> adapterCateory = new ArrayAdapter<>(getContext(), R.layout.row_category_act, categories);
         categoryAct.setAdapter(adapterCateory);
@@ -110,29 +111,16 @@ public class transact_frag extends Fragment {
         progressDialog.setTitle("Please wait...");
         progressDialog.setCanceledOnTouchOutside(false);
 
-        firebaseAuth = FirebaseAuth.getInstance();
-
-        brandEt = view.findViewById(R.id.brandEt);
-
         return view;
-
     }
-
 
     private void loadImages(){
 
         Log.d(TAG, "loadImages: ");
-
-
         adapterImagesPicked = new AdapterImagesPicked(getContext(), imagePickedArrayList);
-
         imagesRv.setAdapter(adapterImagesPicked);
-
-
-
     }
-
-
+    
     private void showImagePickOption() {
         Log.d(TAG, "loadImages: ");
 
@@ -140,7 +128,6 @@ public class transact_frag extends Fragment {
         popupMenu.getMenu().add(Menu.NONE, 1, 1, "Camera");
         popupMenu.getMenu().add(Menu.NONE, 2, 2, "Gallery");
         popupMenu.show();
-
         popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
@@ -164,13 +151,10 @@ public class transact_frag extends Fragment {
                         requestStoragePermission.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE);
                     }
                 }
-
                 return true;
             }
         });
     }
-
-
     private ActivityResultLauncher<String> requestStoragePermission = registerForActivityResult(
             new ActivityResultContracts.RequestPermission(),
             new ActivityResultCallback<Boolean>() {
@@ -178,21 +162,14 @@ public class transact_frag extends Fragment {
                 public void onActivityResult(Boolean isGranted) {
                     Log.d(TAG, "onActivityResult: isGranted: "+ isGranted);
                     if (isGranted){
-
                         pickImageGallery();
-
                     }else {
-
                         Toast.makeText(getContext(), "Storage permission denied..", Toast.LENGTH_LONG).show();
-
-
-
                     }
                 }
             }
     );
-
-
+    
     private final ActivityResultLauncher<String[]> requestCameraPermission = registerForActivityResult(
             new ActivityResultContracts.RequestMultiplePermissions(),
             new ActivityResultCallback<Map<String, Boolean>>() {
@@ -211,9 +188,7 @@ public class transact_frag extends Fragment {
                 }
             }
     );
-
-
-
+    
     private void pickImagesCamera() {
         Log.d(TAG, "pickImageCamera: ");
 
@@ -226,12 +201,9 @@ public class transact_frag extends Fragment {
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri);
         cameraActivityLauncher.launch(intent);
     }
-
-
-
+    
     private void pickImageGallery() {
         Log.d(TAG, "pickImageGallery: ");
-
         Intent intent = new Intent(Intent.ACTION_PICK);
         intent.setType("image/*");
         galleryActivityResultLauncher.launch(intent);
@@ -247,45 +219,28 @@ public class transact_frag extends Fragment {
                     if (result.getResultCode() == Activity.RESULT_OK){
 
                         Intent data = result.getData();
-
                         imageUri = data.getData();
-
                         Log.d(TAG, "onActivityResult: imageUri: "+ imageUri);
-
                         String timestamp = " "+System.currentTimeMillis();
-
                         ModelImagePicked modelImagePicked = new ModelImagePicked(timestamp, imageUri, null, false);
-
                         imagePickedArrayList.add(modelImagePicked);
-
                         loadImages();
                     } else {
-
                         Toast.makeText(getContext(), "Cancelled...!", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
     );
 
-
     private final ActivityResultLauncher<Intent> cameraActivityLauncher = registerForActivityResult(
-
             new ActivityResultContracts.StartActivityForResult(),
-
             new ActivityResultCallback<ActivityResult>() {
                 @Override
-
                 public void onActivityResult(ActivityResult result) {
-
-
                     if (result.getResultCode() == Activity.RESULT_OK){
-
                         Log.d(TAG, "onActivityResult: imageUri: "+ imageUri);
-
                         String timestamp = " "+System.currentTimeMillis();
-
                         ModelImagePicked modelImagePicked = new ModelImagePicked(timestamp, imageUri, null, false);
-
                         imagePickedArrayList.add(modelImagePicked);
 
                         loadImages();
@@ -293,14 +248,8 @@ public class transact_frag extends Fragment {
 
                         Toast.makeText(getContext(), "Cancelled...!", Toast.LENGTH_SHORT).show();
                     }
-
-
-
-
                 }
             }
-
-
     );
 
 
@@ -312,21 +261,18 @@ public class transact_frag extends Fragment {
             "Electronics & Appliances",
             "Computer/Laptop",
             "Others"
-
     };
 
     public  static  final String[] conditions = {
             "New",
             "Used",
             "Refurbished",
-
     };
 
     private String brand = "";
     private String category = "";
     private String address = "";
     private String condition = "";
-
     private String price = "";
     private String title = "";
     private String description = "";
@@ -337,7 +283,6 @@ public class transact_frag extends Fragment {
     private void validateData(){
 
         Log.d(TAG, "validateData: " );
-
         brand = brandEt.getText().toString().trim();
         category = categoryAct.getText().toString().trim();
         condition = conditionAct.getText().toString().trim();
@@ -346,70 +291,47 @@ public class transact_frag extends Fragment {
         title = titleEt.getText().toString().trim();
         description = descriptionEt.getText().toString().trim();
 
-
         if (brand.isEmpty()){
-
             brandEt.setError("Enter Brand!");
             brandEt.requestFocus();
 
-
-
         } else if (category.isEmpty()){
-
             categoryAct.setError("Choose Category!");
             categoryAct.requestFocus();
 
-
         }  else if (condition.isEmpty()){
-
             conditionAct.setError("Choose Condition!");
             conditionAct.requestFocus();
 
-//
 //        } else if (address.isEmpty()){
 //
 //            locationAct.setError("Choose Loaction!");
 //            locationAct.requestFocus();
-//
 
         } else if (title.isEmpty()){
-
             titleEt.setError("Enter Title!");
             titleEt.requestFocus();
 
-
         } else if (description.isEmpty()){
-
             descriptionEt.setError("Enter Description!");
             descriptionEt.requestFocus();
 
-
         } else if (imagePickedArrayList.isEmpty()){
-
             Toast.makeText(getContext(), "Pick at least one image", Toast.LENGTH_SHORT).show();
-
 
         } else {
             postAd();
         }
-
-
-
     }
-
     public static final String AD_STATUS_AVAILABLE= "AVAILABLE";
-
     public static final String AD_STATUS_SOLD= "SOLD OUT";
-
     private void postAd(){
-
         progressDialog.setMessage("Publishing Ad");
         progressDialog.show();
 
         long timestamp = System.currentTimeMillis();
 
         DatabaseReference userAdsRef = FirebaseDatabase.getInstance().getReference("Ads").child(firebaseAuth.getUid());
-
         String adId = userAdsRef.push().getKey();
 
         HashMap<String, Object> hashMap = new HashMap<>();
@@ -436,15 +358,6 @@ public class transact_frag extends Fragment {
                     progressDialog.dismiss();
                     Toast.makeText(getContext(), "Failed to Publish" + e.getMessage(), Toast.LENGTH_SHORT).show();
                 });
-
-
-
-
-
-
-
-
-
     }
 
     private void uploadImagesStorage(String adId) {
@@ -454,14 +367,8 @@ public class transact_frag extends Fragment {
             ModelImagePicked modelImagePicked = imagePickedArrayList.get(i);
             String imageName = modelImagePicked.getId();
             String filePathAndName = "Ads/" + firebaseAuth.getUid() + "/" + adId + "/" + imageName;
-
-
             int imageIndecForProgress = i+1;
-
-
             StorageReference storageReference = FirebaseStorage.getInstance().getReference(filePathAndName);
-
-
             storageReference.putFile(modelImagePicked.getImageUri())
                     .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
                         @Override
