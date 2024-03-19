@@ -2,6 +2,7 @@ package com.example.uniwares.Fragments;
 
 import static android.content.ContentValues.TAG;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,10 +12,32 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
+import android.content.Context;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.uniwares.Adapters.CategoryAdapter;
+import com.example.uniwares.Domain.CategoryDomain;
 import com.example.uniwares.R;
+
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.uniwares.Adapters.CategoryAdapter;
+import com.example.uniwares.Domain.CategoryDomain;
+import com.example.uniwares.R;
+
+import java.util.ArrayList;
+
+import androidx.annotation.NonNull;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -23,7 +46,12 @@ import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
 
+
 public class home_frag extends Fragment {
+
+    private RecyclerView.Adapter adapter;
+    private RecyclerView recyclerViewCategoryList;
+
 
 
     public home_frag() {
@@ -44,6 +72,13 @@ public class home_frag extends Fragment {
 
 
         propic = view.findViewById(R.id.profileimg);
+
+
+        recyclerViewCategoryList = view.findViewById(R.id.recyclerView);
+
+        recyclerViewCategoryList(view.getContext());
+
+
 
 
         db.getReference().child("Users").child(FirebaseAuth.getInstance().getUid())
@@ -99,4 +134,35 @@ public class home_frag extends Fragment {
 
         return view;
     }
+
+    public void recyclerViewCategoryList(Context context) {
+        if (recyclerViewCategoryList != null) {
+            LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
+            recyclerViewCategoryList.setLayoutManager(linearLayoutManager);
+
+
+            ArrayList<CategoryDomain> category = new ArrayList<>();
+            category.add(new CategoryDomain("Books", "book_1"));
+            category.add(new CategoryDomain("Books", "book_1"));
+            category.add(new CategoryDomain("Books", "book_1"));
+            category.add(new CategoryDomain("Books", "book_1"));
+            category.add(new CategoryDomain("Books", "book_1"));
+
+
+            adapter = new CategoryAdapter(category);
+            recyclerViewCategoryList.setAdapter(adapter);
+
+        }
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
