@@ -52,7 +52,7 @@ public class home_frag extends Fragment {
     private RecyclerView.Adapter adapter;
     private RecyclerView recyclerViewCategoryList;
 
-
+//Chnge for the commit
 
     public home_frag() {
         // Required empty public constructor
