@@ -2,6 +2,7 @@ package com.example.uniwares.Fragments;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Intent;
@@ -27,27 +28,23 @@ import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.uniwares.Adapters.AdapterImagesPicked;
 import com.example.uniwares.Models.ModelImagePicked;
 import com.example.uniwares.R;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class transact_frag extends Fragment {
 
@@ -77,7 +74,7 @@ public class transact_frag extends Fragment {
         imagesRv = view.findViewById(R.id.imagesRv);
         categoryAct = view.findViewById(R.id.categoryAct);
         conditionAct = view.findViewById(R.id.conditionAct);
-        locationAct = view.findViewById(R.id.locationAct);
+//        locationAct = view.findViewById(R.id.locationAct);
         priceEt = view.findViewById(R.id.priceEt);
         titleEt = view.findViewById(R.id.titleEt);
         descriptionEt =  view.findViewById(R.id.descriptionEt);
@@ -210,27 +207,30 @@ public class transact_frag extends Fragment {
     }
 
     private final ActivityResultLauncher<Intent> galleryActivityResultLauncher = registerForActivityResult(
-
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
                 @Override
                 public void onActivityResult(ActivityResult result) {
-
-                    if (result.getResultCode() == Activity.RESULT_OK){
-
+                    if (result.getResultCode() == Activity.RESULT_OK) {
                         Intent data = result.getData();
-                        imageUri = data.getData();
-                        Log.d(TAG, "onActivityResult: imageUri: "+ imageUri);
-                        String timestamp = " "+System.currentTimeMillis();
-                        ModelImagePicked modelImagePicked = new ModelImagePicked(timestamp, imageUri, null, false);
-                        imagePickedArrayList.add(modelImagePicked);
-                        loadImages();
+                        if (data != null) {
+                            // Check if data.getData() is null
+                            imageUri = data.getData();
+                            Log.d(TAG, "onActivityResult: imageUri: " + imageUri);
+                            String timestamp = " " + System.currentTimeMillis();
+                            ModelImagePicked modelImagePicked = new ModelImagePicked(timestamp, imageUri, null, false);
+                            imagePickedArrayList.add(modelImagePicked);
+                            loadImages();
+                        } else {
+                            Toast.makeText(getContext(), "Failed to retrieve image", Toast.LENGTH_SHORT).show();
+                        }
                     } else {
-                        Toast.makeText(getContext(), "Cancelled...!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getContext(), "Cancelled...", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
     );
+
 
     private final ActivityResultLauncher<Intent> cameraActivityLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
@@ -242,10 +242,8 @@ public class transact_frag extends Fragment {
                         String timestamp = " "+System.currentTimeMillis();
                         ModelImagePicked modelImagePicked = new ModelImagePicked(timestamp, imageUri, null, false);
                         imagePickedArrayList.add(modelImagePicked);
-
                         loadImages();
                     } else {
-
                         Toast.makeText(getContext(), "Cancelled...!", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -271,13 +269,13 @@ public class transact_frag extends Fragment {
 
     private String brand = "";
     private String category = "";
-    private String address = "";
+//    private String address = "";
     private String condition = "";
     private String price = "";
     private String title = "";
     private String description = "";
-    private int latitude = 0;
-    private int longitude = 0;
+//    private int latitude = 0;
+//    private int longitude = 0;
 
 
     private void validateData(){
@@ -286,7 +284,7 @@ public class transact_frag extends Fragment {
         brand = brandEt.getText().toString().trim();
         category = categoryAct.getText().toString().trim();
         condition = conditionAct.getText().toString().trim();
-        address = locationAct.getText().toString().trim();
+//        address = locationAct.getText().toString().trim();
         price = priceEt.getText().toString().trim();
         title = titleEt.getText().toString().trim();
         description = descriptionEt.getText().toString().trim();
@@ -304,7 +302,6 @@ public class transact_frag extends Fragment {
             conditionAct.requestFocus();
 
 //        } else if (address.isEmpty()){
-//
 //            locationAct.setError("Choose Loaction!");
 //            locationAct.requestFocus();
 
@@ -339,14 +336,14 @@ public class transact_frag extends Fragment {
         hashMap.put("brand", ""+brand);
         hashMap.put("category", ""+category);
         hashMap.put("condition", ""+condition);
-        hashMap.put("address", ""+address);
+//        hashMap.put("address", ""+address);
         hashMap.put("price", ""+price);
         hashMap.put("title", ""+title);
         hashMap.put("description", ""+description);
         hashMap.put("status", ""+AD_STATUS_AVAILABLE);
         hashMap.put("timestamp", timestamp);
-        hashMap.put("latitude", latitude);
-        hashMap.put("longitude", longitude);
+//        hashMap.put("latitude", latitude);
+//        hashMap.put("longitude", longitude);
 
         userAdsRef.child(adId).setValue(hashMap)
                 .addOnSuccessListener(unused -> {
@@ -361,58 +358,76 @@ public class transact_frag extends Fragment {
     }
 
     private void uploadImagesStorage(String adId) {
-        Log.d(TAG, "uploadImagesStorage: ");
+        int totalImagesToUpload = imagePickedArrayList.size();
+        AtomicInteger uploadedImagesCounter = new AtomicInteger(0);
 
         for (int i = 0; i < imagePickedArrayList.size(); i++) {
             ModelImagePicked modelImagePicked = imagePickedArrayList.get(i);
             String imageName = modelImagePicked.getId();
             String filePathAndName = "Ads/" + firebaseAuth.getUid() + "/" + adId + "/" + imageName;
-            int imageIndecForProgress = i+1;
+            int imageIndexForProgress = i + 1;
             StorageReference storageReference = FirebaseStorage.getInstance().getReference(filePathAndName);
+
             storageReference.putFile(modelImagePicked.getImageUri())
-                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
-                            double progress = (100.0 * snapshot.getBytesTransferred()) / snapshot.getTotalByteCount();
+                    .addOnProgressListener(snapshot -> {
+                        double progress = (100.0 * snapshot.getBytesTransferred()) / snapshot.getTotalByteCount();
 
-                            String message = "Uploading Image " + imageIndecForProgress + " of " + imagePickedArrayList.size() + " images...\nProgress " + (int) progress + "%";
+                        String message = "Uploading Image " + imageIndexForProgress + " of " + imagePickedArrayList.size() + " images...\nProgress " + (int) progress + "%";
 
-                            Log.d(TAG, "onProgress: message" + message);
+                        Log.d(TAG, "onProgress: message" + message);
 
-                            progressDialog.setMessage(message);
-                            progressDialog.show();
+                        progressDialog.setMessage(message);
+                        progressDialog.show();
+                    })
+                    .addOnSuccessListener(taskSnapshot -> {
+                        Log.d(TAG, "onSuccess: ");
+
+                        Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+                        while (!uriTask.isSuccessful());
+                        Uri uploadedImageUrl = uriTask.getResult();
+
+                        if (uriTask.isSuccessful()) {
+                            HashMap<String, Object> imageHashMap = new HashMap<>();
+                            imageHashMap.put("id", imageName);
+                            imageHashMap.put("image", uploadedImageUrl.toString());
+
+                            DatabaseReference imagesRef = FirebaseDatabase.getInstance().getReference()
+                                    .child("Ads").child(firebaseAuth.getUid()).child(adId).child("Images").child(imageName);
+                            imagesRef.setValue(imageHashMap);
+                        }
+
+                        if (uploadedImagesCounter.incrementAndGet() == totalImagesToUpload) {
+                            progressDialog.dismiss();
+                            showAdPublishedDialog();
                         }
                     })
-                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                        @Override
-                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                            Log.d(TAG, "onSuccess: ");
-
-                            Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                            while (!uriTask.isSuccessful());
-                            Uri uploadedImageUrl = uriTask.getResult();
-
-                            if (uriTask.isSuccessful()) {
-                                HashMap<String, Object> imageHashMap = new HashMap<>();
-                                imageHashMap.put("id", "" + modelImagePicked.imageUri);
-                                imageHashMap.put("image", "" + uploadedImageUrl.toString());
-
-                                DatabaseReference imagesRef = FirebaseDatabase.getInstance().getReference()
-                                        .child("Ads").child(firebaseAuth.getUid()).child(adId).child("Images").child(imageName);
-                                imagesRef.setValue(imageHashMap);
-                            }
-
-                            progressDialog.dismiss();
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            Log.d(TAG, "onFailure: " + e);
-                            progressDialog.dismiss();
-                        }
+                    .addOnFailureListener(e -> {
+                        Log.d(TAG, "onFailure: " + e);
+                        progressDialog.dismiss();
                     });
         }
+    }
+
+    private void resetFields() {
+        brandEt.getText().clear();
+        categoryAct.getText().clear();
+        conditionAct.getText().clear();
+//        locationAct.getText().clear();
+        priceEt.getText().clear();
+        titleEt.getText().clear();
+        descriptionEt.getText().clear();
+        imagePickedArrayList.clear();
+        loadImages();
+    }
+    private void showAdPublishedDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+        builder.setTitle("Ad Published");
+        builder.setMessage("Your ad has been published successfully!");
+        builder.setPositiveButton("OK", (dialog, which) -> {
+            resetFields(); // Reset the fields after the dialog is dismissed
+        });
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
     }
 }
 
