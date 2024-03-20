@@ -7,12 +7,10 @@
     android:background="#FFFFFF"
     tools:context=".Fragments.transact_frag">
 
-
     <RelativeLayout
         android:id="@+id/toolbarR"
         android:layout_width="match_parent"
         android:layout_height="47dp">
-
 
         <TextView
             android:layout_width="wrap_content"
@@ -21,7 +19,6 @@
             android:fontFamily="@font/instagramsansmedium"
             android:text="Sell your product"
             android:textSize="@dimen/_16ssp"/>
-
 
         <ImageButton
             android:id="@+id/adimgbutton"
@@ -34,13 +31,11 @@
             android:padding="10dp"
             android:paddingRight="@dimen/_20sdp" />
 
-
         <View
             android:layout_width="wrap_content"
             android:layout_height="1dp"
             android:background="#CACACA"
             android:layout_alignParentBottom="true"/>
-
 
     </RelativeLayout>
 
@@ -52,11 +47,9 @@
         android:layout_below="@id/toolbarR"
         android:layout_above="@id/postAdbtn">
 
-
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
-
 
             <TextView
                 android:id="@+id/imageslabtv"
@@ -64,9 +57,7 @@
                 android:layout_height="wrap_content"
                 android:text="Pick upto 10 images" />
 
-
             <androidx.recyclerview.widget.RecyclerView
-
                 android:id="@+id/imagesRv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -75,9 +66,7 @@
                 app:spanCount="4"
                 tools:listitem="@layout/raw_images_picked"/>
 
-
             <com.google.android.material.textfield.TextInputLayout
-
                 android:id="@+id/brandTil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -97,14 +86,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"/>
-
-
             </com.google.android.material.textfield.TextInputLayout>
 
-
-
             <com.google.android.material.textfield.TextInputLayout
-
                 android:id="@+id/categoryTil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -125,15 +109,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="none"/>
-
-
             </com.google.android.material.textfield.TextInputLayout>
 
-
-
-
             <com.google.android.material.textfield.TextInputLayout
-
                 android:id="@+id/conditionTil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -154,47 +132,15 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="none"/>
-
-
             </com.google.android.material.textfield.TextInputLayout>
 
 
 
-
-
             <com.google.android.material.textfield.TextInputLayout
-
-                android:id="@+id/locationTil"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/conditionTil"
-                android:background="@android:color/transparent"
-                app:boxStrokeWidth="1dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
-                android:layout_marginTop="10dp"
-                android:hint="Location"
-                app:boxStrokeColor="@color/white"
-                app:boxCornerRadiusBottomStart="8dp"
-                app:boxCornerRadiusBottomEnd="8dp"
-                app:boxCornerRadiusTopEnd="8dp"
-                app:boxCornerRadiusTopStart="8dp">
-
-                <AutoCompleteTextView
-                    android:id="@+id/locationAct"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="none"/>
-
-
-            </com.google.android.material.textfield.TextInputLayout>
-
-
-            <com.google.android.material.textfield.TextInputLayout
-
                 android:id="@+id/priceTil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/locationTil"
+                android:layout_below="@id/conditionTil"
                 android:background="@android:color/transparent"
                 app:boxStrokeWidth="1dp"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -211,14 +157,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal"/>
-
-
             </com.google.android.material.textfield.TextInputLayout>
 
-
-
             <com.google.android.material.textfield.TextInputLayout
-
                 android:id="@+id/titleTil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -239,14 +180,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"/>
-
-
             </com.google.android.material.textfield.TextInputLayout>
 
-
-
             <com.google.android.material.textfield.TextInputLayout
-
                 android:id="@+id/descriptionTil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -267,20 +203,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textCapSentences|textMultiLine"/>
-
-
             </com.google.android.material.textfield.TextInputLayout>
-
-
-
-
-
 
         </RelativeLayout>
 
-
     </androidx.core.widget.NestedScrollView>
-
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/postAdbtn"
@@ -294,8 +221,5 @@
         android:text="Post your product"
         android:textColor="@color/white"
         />
-
-
-
 
 </RelativeLayout>

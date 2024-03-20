@@ -3,18 +3,13 @@ package com.example.uniwares.Models;
 import android.net.Uri;
 
 public class ModelImagePicked {
-
     String id = "";
     public Uri imageUri = null;
     public String imageUrl = null;
     Boolean fromInternet = null;
-
-
     public ModelImagePicked  (){
 
-
     }
-
 
     public ModelImagePicked(String id, Uri imageUri, String imageUrl, Boolean fromInternet) {
         this.id = id;
@@ -22,7 +17,6 @@ public class ModelImagePicked {
         this.imageUrl = imageUrl;
         this.fromInternet = fromInternet;
     }
-
 
     public String getId() {
         return id;

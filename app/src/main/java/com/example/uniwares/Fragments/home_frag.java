@@ -12,32 +12,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import android.content.Context;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.uniwares.Adapters.CategoryAdapter;
-import com.example.uniwares.Domain.CategoryDomain;
-import com.example.uniwares.R;
-
-import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.uniwares.Adapters.CategoryAdapter;
-import com.example.uniwares.Domain.CategoryDomain;
-import com.example.uniwares.R;
-
-import java.util.ArrayList;
-
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.uniwares.Adapters.CategoryAdapter;
+import com.example.uniwares.Domain.CategoryDomain;
+import com.example.uniwares.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -45,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 
 
 public class home_frag extends Fragment {
@@ -52,7 +35,8 @@ public class home_frag extends Fragment {
     private RecyclerView.Adapter adapter;
     private RecyclerView recyclerViewCategoryList;
 
-//Chnge for the commit
+
+
 
     public home_frag() {
         // Required empty public constructor
@@ -70,15 +54,20 @@ public class home_frag extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home_frag, container, false);
 
-
-        propic = view.findViewById(R.id.profileimg);
-
-
         recyclerViewCategoryList = view.findViewById(R.id.recyclerView);
 
         recyclerViewCategoryList(view.getContext());
 
+        ArrayList<CategoryDomain> categoryList = new ArrayList<>();
 
+        adapter = new CategoryAdapter(categoryList);
+        recyclerViewCategoryList.setAdapter(adapter);
+
+        recyclerViewCategoryList(view.getContext());
+
+
+
+        propic = view.findViewById(R.id.profileimg);
 
 
         db.getReference().child("Users").child(FirebaseAuth.getInstance().getUid())
@@ -129,9 +118,6 @@ public class home_frag extends Fragment {
 
 
 
-
-
-
         return view;
     }
 
@@ -140,29 +126,23 @@ public class home_frag extends Fragment {
             LinearLayoutManager linearLayoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false);
             recyclerViewCategoryList.setLayoutManager(linearLayoutManager);
 
+            ArrayList<CategoryDomain> categoryList = new ArrayList<>();
+            for (String categoryName : categories) {
+                categoryList.add(new CategoryDomain(categoryName, "book_1"));
+            }
 
-            ArrayList<CategoryDomain> category = new ArrayList<>();
-            category.add(new CategoryDomain("Books", "book_1"));
-            category.add(new CategoryDomain("Books", "book_1"));
-            category.add(new CategoryDomain("Books", "book_1"));
-            category.add(new CategoryDomain("Books", "book_1"));
-            category.add(new CategoryDomain("Books", "book_1"));
-
-
-            adapter = new CategoryAdapter(category);
+            adapter = new CategoryAdapter(categoryList);
             recyclerViewCategoryList.setAdapter(adapter);
-
         }
     }
+
+    public static final String[] categories = {
+            "Books",
+            "Mobiles",
+            "Clothes",
+            "Sports",
+            "Electronics & Appliances",
+            "Computer/Laptop",
+            "Others"
+    };
 }
-
-
-
-
-
-
-
-
-
-
-

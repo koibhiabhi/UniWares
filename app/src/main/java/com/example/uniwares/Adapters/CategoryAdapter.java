@@ -11,13 +11,20 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+<<<<<<< HEAD
+=======
+import com.bumptech.glide.Glide;
+>>>>>>> origin/master
 import com.example.uniwares.Domain.CategoryDomain;
 import com.example.uniwares.R;
 
 import java.util.ArrayList;
+<<<<<<< HEAD
 import com.bumptech.glide.Glide;
 
 
+=======
+>>>>>>> origin/master
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
     ArrayList<CategoryDomain>categoryDomains;
@@ -39,6 +46,7 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         String picUrl = "";
         switch(position){
             case 0:{
+<<<<<<< HEAD
                 picUrl = "book_1";
                 holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.book_background));
                 break;
@@ -66,6 +74,40 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
             case 5:{
                 picUrl = "book_1";
                 holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.book_background));
+=======
+                picUrl = "bookscat";
+                holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.category_background));
+                break;
+            }
+            case 1:{
+                picUrl = "mobilecat";
+                holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.category_background));
+                break;
+            }
+            case 2:{
+                picUrl = "clothescat";
+                holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.category_background));
+                break;
+            }
+            case 3:{
+                picUrl = "sportscat";
+                holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.category_background));
+                break;
+            }
+            case 4:{
+                picUrl = "electcat";
+                holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.category_background));
+                break;
+            }
+            case 5:{
+                picUrl = "laptopcat";
+                holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.category_background));
+                break;
+            }
+            case 6:{
+                picUrl = "othercat";
+                holder.mainLayout.setBackground(ContextCompat.getDrawable(holder.itemView.getContext(),R.drawable.category_background));
+>>>>>>> origin/master
                 break;
             }
         }
@@ -88,6 +130,10 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
     }
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/master
     public class ViewHolder extends RecyclerView.ViewHolder{
         TextView categoryName;
         ImageView categoryPic;
