@@ -30,6 +30,7 @@ public class chat_screen extends AppCompatActivity {
 
     FirebaseAuth auth;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

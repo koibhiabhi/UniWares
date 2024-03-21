@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainLayout"
+    android:layout_width="230dp"
+    android:layout_height="@dimen/_110sdp"
+    android:layout_margin="7dp"
+    app:cardCornerRadius="10dp"
+    android:backgroundTint="#FFFFFF">
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="10dp">
+
+    <ImageView
+        android:id="@+id/postadImage"
+        android:layout_width="115dp"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/logo"/>
+
+    </androidx.cardview.widget.CardView>
+
+<!--    <View-->
+<!--        android:layout_width="72dp"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_marginStart="44dp"-->
+<!--        android:background="@drawable/gradient_bg" />-->
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="102dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="7dp"
+        android:fontFamily="@font/chivoregularvtt"
+        android:paddingStart="3dp"
+        android:text="Product Name"
+        android:textSize="@dimen/_12ssp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/price"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="139dp"
+        android:layout_marginTop="69dp"
+        android:fontFamily="@font/chivoregularvtt"
+        android:paddingStart="3dp"
+        android:text="Price"
+        android:textSize="17sp"
+        android:textStyle="bold"
+        android:textColor="#4CAF50"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="122dp"
+        android:layout_marginTop="75dp"
+        android:fontFamily="@font/chivoregularvtt"
+        android:paddingStart="3dp"
+        android:text="Rs:"
+        android:textColor="#9A9A9A"
+        android:textSize="11sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="205dp"
+        android:layout_marginTop="105dp"
+        android:fontFamily="@font/chivoregularvtt"
+        android:paddingStart="3dp"
+        android:text="By:"
+        android:textColor="#9A9A9A"
+        android:textSize="10sp" />
+
+    <TextView
+        android:id="@+id/addedby"
+        android:layout_width="106dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="115dp"
+        android:layout_marginTop="117dp"
+        android:fontFamily="@font/chivoregularvtt"
+        android:paddingStart="3dp"
+        android:text="Loading"
+        android:textSize="13.5sp"
+        android:textAlignment="textEnd"/>
+
+</androidx.cardview.widget.CardView>
