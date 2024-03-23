@@ -12,4 +12,12 @@
         <item name="itemBackground">@android:color/transparent</item>
         <item name="itemIconTint">@drawable/selector_btm_nav_icon_tint</item>
     </style>
+
+    <style name="CustomPopupStyle" parent="@style/Widget.AppCompat.ListPopupWindow">
+        <item name="android:popupBackground">@color/white</item>
+        <item name="android:textColor">@color/grey</item>
+    </style>
+
+
+
 </resources>

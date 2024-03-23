@@ -1,6 +1,5 @@
 package com.example.uniwares.Adapters;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -38,8 +37,8 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.Viewhold
         HashMap<String, String> item = items.get(position);
 
         holder.binding.title.setText(item.get("title"));
-        holder.binding.seller.setText(item.get("username"));
-        holder.binding.priceTxt.setText("Rs. " + item.get("price"));
+        holder.binding.sellername.setText(item.get("username"));
+        holder.binding.priceTxt.setText(item.get("price"));
 
 
         RequestOptions requestOptions = new RequestOptions();

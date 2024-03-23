@@ -2,23 +2,33 @@ package com.example.uniwares.Fragments;
 
 import static android.content.ContentValues.TAG;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.uniwares.Adapters.CategoryAdapter;
 import com.example.uniwares.Adapters.RecentlyAddedAdsAdapter;
 import com.example.uniwares.Domain.CategoryDomain;
@@ -35,25 +45,19 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 
-
-public class home_frag extends Fragment {
+public class home_frag extends Fragment implements CategoryAdapter.OnCategoryClickListener {
 
     private RecyclerView.Adapter adapter;
     private RecyclerView recyclerViewCategoryList, recyclerViewRecentAds;
-
-
-
+    private EditText search;
+    private String searchText = "";
 
     public home_frag() {
         // Required empty public constructor
     }
 
     FirebaseDatabase db = FirebaseDatabase.getInstance();
-
     ImageView propic;
-
-
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -61,7 +65,6 @@ public class home_frag extends Fragment {
         View view = inflater.inflate(R.layout.fragment_home_frag, container, false);
 
         recyclerViewCategoryList = view.findViewById(R.id.recyclerView);
-
         recyclerViewCategoryList(view.getContext());
 
         ArrayList<CategoryDomain> categoryList = new ArrayList<>();
@@ -89,12 +92,35 @@ public class home_frag extends Fragment {
             }
         });
 
-
-
-
-
         propic = view.findViewById(R.id.profileimg);
 
+        Button splash = view.findViewById(R.id.dukaan);
+        splash.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
+
+                // Inflate the custom layout for the dialog content
+                LayoutInflater inflater = requireActivity().getLayoutInflater();
+                View dialogView = inflater.inflate(R.layout.welcomeuniware, null);
+                builder.setView(dialogView);
+
+                // Set the background of the dialog's window to be transparent
+                AlertDialog dialog = builder.create();
+                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
+                // Set other properties of the dialog if needed
+                builder.setCancelable(true)
+                        .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.dismiss();
+                            }
+                        });
+
+                // Show the AlertDialog
+                dialog.show();
+            }
+        });
 
         db.getReference().child("Users").child(FirebaseAuth.getInstance().getUid())
                 .addListenerForSingleValueEvent(new ValueEventListener() {
@@ -108,9 +134,6 @@ public class home_frag extends Fragment {
                                 .load(profilePicUrl)
                                 .placeholder(R.drawable.avatar)
                                 .into(propic);
-
-
-
                     }
 
                     @Override
@@ -118,8 +141,6 @@ public class home_frag extends Fragment {
 
                     }
                 });
-
-
 
         TextView welcomename = view.findViewById(R.id.welcomename);
 
@@ -141,16 +162,81 @@ public class home_frag extends Fragment {
                 }
         );
 
-
         recyclerViewRecentAds = view.findViewById(R.id.recylerViewrecentlyadd);
 
+        TextView t1 = view.findViewById(R.id.textView17);
+        CardView cv = view.findViewById(R.id.mainLayout);
+        ConstraintLayout constraintLayout = view.findViewById(R.id.constraintLayout);
+        TextView t  = view.findViewById(R.id.textView13);
+        Button b = view.findViewById(R.id.dukaan);
+        CardView c = view.findViewById(R.id.card);
+        LottieAnimationView l = view.findViewById(R.id.anibag);
 
+        int originalTopMargin;
+        int originalTopToTop;
+        int originalBottomToBottom;
 
-        fetchRecentAds();
+        ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) recyclerViewRecentAds.getLayoutParams();
+        originalTopMargin = params.topMargin;
+        originalTopToTop = params.topToTop;
+        originalBottomToBottom = params.bottomToBottom;
 
+        search = view.findViewById(R.id.editTextText);
 
+        search.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
 
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                searchText = s.toString();
+                fetchRecentAds(searchText);
 
+                if (!searchText.isEmpty()) {
+                    // Hide other views
+                    recyclerViewCategoryList.setVisibility(View.GONE);
+                    b.setVisibility(View.GONE);
+                    constraintLayout.setVisibility(View.GONE);
+                    t.setVisibility(View.GONE);
+                    c.setVisibility(View.GONE);
+                    l.setVisibility(View.GONE);
+                    t1.setVisibility(View.GONE);
+                    cv.setVisibility(View.GONE);
+
+                    // Set top margin of recyclerViewRecentAds
+                    ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) recyclerViewRecentAds.getLayoutParams();
+                    params.topToTop = ConstraintLayout.LayoutParams.PARENT_ID;  // Set top constraint to parent's top
+                    params.bottomToBottom = ConstraintLayout.LayoutParams.PARENT_ID;  // Set bottom constraint to parent's bottom
+                    params.topMargin = 380;  // Set top margin to 380dp
+                    recyclerViewRecentAds.setLayoutParams(params);
+
+                } else {
+                    // Show other views
+                    recyclerViewCategoryList.setVisibility(View.VISIBLE);
+                    b.setVisibility(View.VISIBLE);
+                    constraintLayout.setVisibility(View.VISIBLE);
+                    t.setVisibility(View.VISIBLE);
+                    c.setVisibility(View.VISIBLE);
+                    l.setVisibility(View.VISIBLE);
+                    t1.setVisibility(View.VISIBLE);
+                    cv.setVisibility(View.VISIBLE);
+
+                    ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) recyclerViewRecentAds.getLayoutParams();
+                    params.topToTop = originalTopToTop;
+                    params.bottomToBottom = originalBottomToBottom;
+                    params.topMargin = originalTopMargin;
+                    recyclerViewRecentAds.setLayoutParams(params);
+
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
+        fetchRecentAds(searchText);
 
         return view;
     }
@@ -165,13 +251,14 @@ public class home_frag extends Fragment {
                 categoryList.add(new CategoryDomain(categoryName, "book_1"));
             }
 
-            adapter = new CategoryAdapter(categoryList);
+            adapter = new CategoryAdapter(categoryList, this); // 'this' refers to the OnCategoryClickListener implemented in home_frag
             recyclerViewCategoryList.setAdapter(adapter);
         }
     }
 
+    //working search bar
 
-    private void fetchRecentAds() {
+    private void fetchRecentAds(String searchText) {
         db.getReference().child("Ads").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -201,16 +288,19 @@ public class home_frag extends Fragment {
                                                 break; // Break after retrieving the first image URL
                                             }
 
-                                            HashMap<String, String> adDetails = new HashMap<>();
-                                            adDetails.put("postId", postId);
-                                            adDetails.put("title", title);
-                                            adDetails.put("price", price);
-                                            adDetails.put("addedBy", username);
-                                            adDetails.put("timestamp", timestamp.toString());
-                                            adDetails.put("username", username);
-                                            adDetails.put("imageUrl", imageUrl);
+                                            // Filter ads based on search query
+                                            if (title.toLowerCase().contains(searchText.toLowerCase())) {
+                                                HashMap<String, String> adDetails = new HashMap<>();
+                                                adDetails.put("postId", postId);
+                                                adDetails.put("title", title);
+                                                adDetails.put("price", price);
+                                                adDetails.put("addedBy", username);
+                                                adDetails.put("timestamp", timestamp.toString());
+                                                adDetails.put("username", username);
+                                                adDetails.put("imageUrl", imageUrl);
 
-                                            allAds.add(adDetails);
+                                                allAds.add(adDetails);
+                                            }
 
                                             // Sort the ads based on timestamp
                                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
@@ -231,7 +321,6 @@ public class home_frag extends Fragment {
                                             recyclerViewRecentAds.setAdapter(adapter);
                                         }
                                     }
-
                                     @Override
                                     public void onCancelled(@NonNull DatabaseError error) {
                                         // Handle cancelled event
@@ -246,14 +335,12 @@ public class home_frag extends Fragment {
                     Log.d(TAG, "No ads found");
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 // Handle cancelled event
             }
         });
     }
-
 
     public static final String[] categories = {
             "Books",
@@ -264,4 +351,19 @@ public class home_frag extends Fragment {
             "Computer/Laptop",
             "Others"
     };
+
+    @Override
+    public void onCategoryClick(String category) {
+        // Load explore_frag with the selected category
+        loadFragment(new explore_frag(category));
+    }
+
+    private void loadFragment(Fragment fragment) {
+        // Replace the current fragment with the new fragment
+        getActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.container, fragment)
+                .addToBackStack(null)
+                .commit();
+    }
 }

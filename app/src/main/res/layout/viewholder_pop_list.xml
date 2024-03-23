@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="175dp"
     android:layout_height="245dp"
     android:layout_margin="8dp"
     android:background="@drawable/grey_background"
-    android:elevation="8dp">
+    android:elevation="8dp"
+    app:cardCornerRadius="10dp">
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/imageView3"
         android:layout_width="175dp"
-        android:layout_height="155dp"
+        android:layout_height="165dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
+        android:scaleType="centerCrop"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.177"
+        app:layout_constraintVertical_bias="0.0"
         tools:srcCompat="@tools:sample/avatars" />
 
     <View
@@ -34,43 +36,83 @@
 
     <TextView
         android:id="@+id/title"
-        android:layout_width="140dp"
-        android:layout_height="30dp"
+
+        android:layout_width="160dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="170dp"
         android:layout_marginEnd="8dp"
+        android:fontFamily="@font/chivobold"
         android:lines="2"
         android:maxLines="2"
-        android:text="title"
-        android:textSize="14sp"
+        android:paddingStart="3dp"
+        android:text="Product Name"
+        android:textSize="@dimen/_12ssp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/view" />
 
     <TextView
-        android:id="@+id/priceTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Rs. 500"
+        android:text="Rs."
         android:textColor="#5A5555"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="@+id/view"
         app:layout_constraintEnd_toEndOf="parent"
-
-        app:layout_constraintHorizontal_bias="0.097"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="222dp"
+        android:layout_marginEnd="8dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView11"
-        app:layout_constraintVertical_bias="0.428" />
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
 
     <TextView
-        android:id="@+id/seller"
+        android:id="@+id/priceTxt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="218.2dp"
+        android:layout_marginEnd="8dp"
+        android:text="500"
+        android:textColor="#4CAF50"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+
+
+    <TextView
         android:layout_width="115dp"
-        android:layout_height="25dp"
-        android:text="Sold By: Abhinav Jain"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="206dp"
+        android:layout_marginEnd="14dp"
+        android:text="Sold By:"
+        android:textAlignment="textEnd"
         android:textColor="#5A5555"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="@+id/view"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView11" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/sellername"
+        android:layout_width="115dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="221dp"
+        android:layout_marginEnd="14dp"
+        android:text="Sold By"
+        android:textAlignment="textEnd"
+        android:textColor="#5A5555"
+        android:textSize="12sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11" />
+</androidx.cardview.widget.CardView>

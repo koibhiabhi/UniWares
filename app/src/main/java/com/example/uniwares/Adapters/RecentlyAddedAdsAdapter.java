@@ -46,7 +46,7 @@ public class RecentlyAddedAdsAdapter extends RecyclerView.Adapter<RecentlyAddedA
         // Load image using Picasso or any other image loading library
         Picasso.get()
                 .load(ad.get("imageUrl"))
-                .placeholder(R.drawable.bookscat)
+                .placeholder(R.drawable.logo)
                 .error(R.drawable.logo) // Optional: Set error placeholder image
                 .into(holder.imageView, new Callback() {
                     @Override

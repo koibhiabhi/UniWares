@@ -1,5 +1,6 @@
 package com.example.uniwares.Adapters;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,21 +13,30 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-
 import com.example.uniwares.Domain.CategoryDomain;
+import com.example.uniwares.Fragments.explore_frag;
 import com.example.uniwares.R;
 
 import java.util.ArrayList;
 
-import com.bumptech.glide.Glide;
+
 
 
 
 public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHolder> {
     ArrayList<CategoryDomain>categoryDomains;
 
+
+    //
+    private Context context;
+
+
     public CategoryAdapter(ArrayList<CategoryDomain> category) {
         this.categoryDomains = category;
+
+        //
+        this.context = context;
+
     }
 
     @NonNull
@@ -83,6 +93,18 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
                 .load(drawableResourceId)
                 .into(holder.categoryPic);
 
+
+
+        //
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Pass the selected category to explore_frag
+                String selectedCategory = categoryDomains.get(position).getTitle();
+                listener.onCategoryClick(selectedCategory);
+            }
+        });
+
     }
 
 
@@ -95,6 +117,18 @@ public class CategoryAdapter extends RecyclerView.Adapter<CategoryAdapter.ViewHo
         this.categoryDomains = categories;
         notifyDataSetChanged();
     }
+
+    public interface OnCategoryClickListener {
+        void onCategoryClick(String category);
+    }
+    private OnCategoryClickListener listener;
+
+    public CategoryAdapter(ArrayList<CategoryDomain> category, OnCategoryClickListener listener) {
+        this.categoryDomains = category;
+        this.listener = listener;
+    }
+
+
 
 
 

@@ -8,13 +8,9 @@
     android:background="@drawable/bgforall"
     tools:context=".Fragments.home_frag">
 
-
-
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
@@ -29,8 +25,6 @@
             app:layout_constraintTop_toBottomOf="@+id/editTextText"
             app:layout_constraintVertical_bias="0.0">
 
-
-
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/lottieAnimationView"
                 android:layout_width="wrap_content"
@@ -44,7 +38,6 @@
                 app:lottie_autoPlay="true"
                 app:lottie_loop="true"
                 app:lottie_rawRes="@raw/hasslefree" />
-
 
             <TextView
                 android:id="@+id/textView8"
@@ -97,7 +90,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profileimg"
             android:layout_width="50dp"
@@ -128,7 +120,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-
 
                 <TextView
                     android:id="@+id/welcometext"
@@ -221,7 +212,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginEnd="50dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -245,14 +236,12 @@
             app:layout_constraintTop_toBottomOf="@+id/recyclerView"
             app:layout_constraintVertical_bias="0.02" />
 
-
-
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recylerViewrecentlyadd"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
+            android:layout_marginEnd="50dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -260,12 +249,11 @@
             app:layout_constraintTop_toBottomOf="@+id/textView17"
             app:layout_constraintVertical_bias="0.0" />
 
-
         <androidx.cardview.widget.CardView
             android:id="@+id/mainLayout"
             android:layout_width="70dp"
             android:layout_height="25dp"
-            android:layout_marginEnd="17dp"
+            android:layout_marginEnd="15dp"
             android:backgroundTint="#F4F4F4"
             android:outlineAmbientShadowColor="@android:color/transparent"
             android:outlineSpotShadowColor="@android:color/transparent"
@@ -275,8 +263,7 @@
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toEndOf="@+id/textView17"
             app:layout_constraintTop_toBottomOf="@+id/recyclerView"
-            app:layout_constraintVertical_bias="0.027">
-
+            app:layout_constraintVertical_bias="0.033">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -288,7 +275,6 @@
                 android:textColor="#9A9A9A"
                 android:textSize="13.sp"
                 android:textStyle="bold" />
-
 
         </androidx.cardview.widget.CardView>
 
@@ -309,6 +295,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <androidx.cardview.widget.CardView
+            android:id="@+id/card"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
@@ -327,8 +314,8 @@
 
         </androidx.cardview.widget.CardView>
 
-
         <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/anibag"
             android:layout_width="190dp"
             android:layout_height="210dp"
             android:layout_marginTop="-15dp"
@@ -341,7 +328,6 @@
             app:lottie_autoPlay="true"
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/bag" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

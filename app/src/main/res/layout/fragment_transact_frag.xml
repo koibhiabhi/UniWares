@@ -73,6 +73,7 @@
                 android:layout_below="@id/imagesRv"
                 android:background="@android:color/transparent"
                 app:boxStrokeWidth="1dp"
+                app:hintTextColor="@color/grey"
                 android:layout_marginTop="10dp"
                 android:hint="Brand"
                 app:boxStrokeColor="@color/white"
@@ -92,6 +93,7 @@
                 android:id="@+id/categoryTil"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                app:hintTextColor="@color/grey"
                 android:layout_below="@id/brandTil"
                 android:background="@android:color/transparent"
                 app:boxStrokeWidth="1dp"
@@ -108,6 +110,7 @@
                     android:id="@+id/categoryAct"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    style="@style/CustomPopupStyle"
                     android:inputType="none"/>
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -118,6 +121,7 @@
                 android:layout_below="@id/categoryTil"
                 android:background="@android:color/transparent"
                 app:boxStrokeWidth="1dp"
+                app:hintTextColor="@color/grey"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_marginTop="10dp"
                 android:hint="Condition"
@@ -131,6 +135,7 @@
                     android:id="@+id/conditionAct"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    style="@style/CustomPopupStyle"
                     android:inputType="none"/>
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -146,6 +151,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_marginTop="10dp"
                 android:hint="Price"
+                app:hintTextColor="@color/grey"
                 app:boxStrokeColor="@color/white"
                 app:boxCornerRadiusBottomStart="8dp"
                 app:boxCornerRadiusBottomEnd="8dp"
@@ -166,6 +172,7 @@
                 android:layout_below="@id/priceTil"
                 android:background="@android:color/transparent"
                 app:boxStrokeWidth="1dp"
+                app:hintTextColor="@color/grey"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_marginTop="10dp"
                 android:hint="Title"
@@ -193,6 +200,7 @@
                 android:layout_marginTop="10dp"
                 android:hint="Description"
                 app:boxStrokeColor="@color/white"
+                app:hintTextColor="@color/grey"
                 app:boxCornerRadiusBottomStart="8dp"
                 app:boxCornerRadiusBottomEnd="8dp"
                 app:boxCornerRadiusTopEnd="8dp"
