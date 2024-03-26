@@ -2,6 +2,7 @@ package com.example.uniwares;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -33,6 +34,11 @@ import com.example.uniwares.Fragments.transact_frag;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.onesignal.Continue;
+import com.onesignal.OneSignal;
+import com.onesignal.debug.LogLevel;
+
+
 
 public class home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -45,6 +51,11 @@ public class home extends AppCompatActivity implements NavigationView.OnNavigati
     Button signout;
 
     private boolean doubleBackToExitPressedOnce = false;
+
+
+
+    private static final String ONESIGNAL_APP_ID = "20f2197f-621c-43fe-8f23-9e5b8c996baf";
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -66,6 +77,31 @@ public class home extends AppCompatActivity implements NavigationView.OnNavigati
         actionBarDrawerToggle.syncState();
 
         navigationView.setNavigationItemSelectedListener(this);
+
+        OneSignal.initWithContext(this);
+
+        OneSignal.getDebug().setLogLevel(LogLevel.VERBOSE);
+
+        // OneSignal Initialization
+        OneSignal.initWithContext(this, ONESIGNAL_APP_ID);
+
+        // requestPermission will show the native Android notification permission prompt.
+        // NOTE: It's recommended to use a OneSignal In-App Message to prompt instead.
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            OneSignal.getNotifications().requestPermission(true, Continue.with(r -> {
+                if (r.isSuccess()) {
+                    if (r.getData()) {
+                        // `requestPermission` completed successfully and the user has accepted permission
+                    }
+                    else {
+                        // `requestPermission` completed successfully but the user has rejected permission
+                    }
+                }
+                else {
+                    // `requestPermission` completed unsuccessfully, check `r.getThrowable()` for more info on the failure reason
+                }
+            }));
+        }
 
 
         BottomNavigationView navbar = findViewById(R.id.btmnavbar);

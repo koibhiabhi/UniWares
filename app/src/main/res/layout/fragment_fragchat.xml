@@ -5,9 +5,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFFFF"
+    android:orientation="vertical"
     tools:context=".Fragments.fragchat">
 
     <!-- TODO: Update blank fragment layout -->
+
+    <EditText
+        android:id="@+id/editTextText"
+        android:layout_width="@dimen/_290sdp"
+        android:layout_height="45dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/search_background"
+        android:drawableStart="@drawable/search"
+        android:drawablePadding="10dp"
+        android:ems="10"
+        android:hint="Search Chats"
+        android:layout_gravity="center"
+        android:inputType="text"
+        android:padding="15dp"
+        android:textSize="14sp"
+     />
 
 
     <androidx.recyclerview.widget.RecyclerView

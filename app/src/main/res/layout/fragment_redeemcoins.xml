@@ -116,7 +116,7 @@
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
                     android:contentDescription="Redeem coin Product one"
-                    android:src="@drawable/img" />
+                    android:src="@drawable/bookscat" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -131,7 +131,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:layout_marginLeft="@dimen/_100sdp"
+                    android:layout_marginLeft="@dimen/_90sdp"
                     android:layout_marginTop="-33dp"
                     android:src="@drawable/coin" />
             </androidx.appcompat.widget.LinearLayoutCompat>
@@ -163,7 +163,7 @@
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
                     android:contentDescription="Redeem coin Product one"
-                    android:src="@drawable/img2" />
+                    android:src="@drawable/dsa" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -209,7 +209,7 @@
                     android:layout_height="wrap_content"
                     android:adjustViewBounds="true"
                     android:contentDescription="Redeem coin Product one"
-                    android:src="@drawable/img3" />
+                    android:src="@drawable/goodies" />
 
                 <TextView
                     android:layout_width="match_parent"
@@ -224,7 +224,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:layout_marginLeft="@dimen/_90sdp"
+                    android:layout_marginLeft="@dimen/_100sdp"
                     android:layout_marginTop="-33dp"
                     android:src="@drawable/coin" />
             </androidx.appcompat.widget.LinearLayoutCompat>

@@ -1,9 +1,12 @@
 package com.example.uniwares.Fragments;
 
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -26,6 +29,7 @@ public class fragchat extends Fragment {
     private RecyclerView recyclerView;
     private UserAdapter userAdapter;
     private ArrayList<Map<String, String>> userList;
+    private EditText searchEditText;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -62,7 +66,33 @@ public class fragchat extends Fragment {
                     }
                 });
 
+        searchEditText = view.findViewById(R.id.editTextText);
+        searchEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                filter(charSequence.toString());
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+            }
+        });
 
         return view;
+    }
+
+    private void filter(String text) {
+        ArrayList<Map<String, String>> filteredList = new ArrayList<>();
+        for (Map<String, String> user : userList) {
+            String username = user.get("username").toLowerCase();
+            if (username.contains(text.toLowerCase())) {
+                filteredList.add(user);
+            }
+        }
+        userAdapter.filterList(filteredList);
     }
 }

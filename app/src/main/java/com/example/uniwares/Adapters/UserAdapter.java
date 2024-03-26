@@ -93,6 +93,13 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.ViewHolder> {
 
     }
 
+    public void filterList(ArrayList<Map<String, String>> filteredList) {
+        userList.clear();
+        userList.addAll(filteredList);
+        notifyDataSetChanged();
+    }
+
+
     @Override
     public int getItemCount() {
         return userList.size();
