@@ -75,6 +75,10 @@ public class explore_frag extends Fragment {
                                 String title = adSnapshot.child("title").getValue(String.class);
                                 String uid = adSnapshot.child("uid").getValue(String.class);
                                 String price = adSnapshot.child("price").getValue(String.class);
+                                String description = adSnapshot.child("description").getValue(String.class); // Add description
+                                String condition = adSnapshot.child("condition").getValue(String.class); // Add condition
+                                String brand = adSnapshot.child("brand").getValue(String.class); // Add brand
+                                String status = adSnapshot.child("status").getValue(String.class); // Add status
 
                                 // Check if the ad is posted by the current user
                                 if (!uid.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
@@ -102,6 +106,11 @@ public class explore_frag extends Fragment {
                                                 ad.put("price", price);
                                                 ad.put("username", username);
                                                 ad.put("imageUrl", imageUrl); // Add image URL
+                                                ad.put("description", description); // Add description
+                                                ad.put("category", category); // Add category
+                                                ad.put("condition", condition); // Add condition
+                                                ad.put("brand", brand); // Add brand
+                                                ad.put("status", status); // Add status
                                                 // Add other fields to the HashMap
 
                                                 adsList.add(ad);
@@ -123,6 +132,7 @@ public class explore_frag extends Fragment {
                                 }
                             }
                         }
+
                     }
                 }
 

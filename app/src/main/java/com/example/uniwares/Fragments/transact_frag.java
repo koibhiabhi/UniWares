@@ -6,6 +6,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.ContentValues;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -34,13 +35,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.uniwares.Adapters.AdapterImagesPicked;
 import com.example.uniwares.Models.ModelImagePicked;
 import com.example.uniwares.R;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -357,6 +360,62 @@ public class transact_frag extends Fragment {
                 });
     }
 
+
+
+//    private void uploadImagesStorage(String adId) {
+//        int totalImagesToUpload = imagePickedArrayList.size();
+//        AtomicInteger uploadedImagesCounter = new AtomicInteger(0);
+//
+//        for (int i = 0; i < imagePickedArrayList.size(); i++) {
+//            ModelImagePicked modelImagePicked = imagePickedArrayList.get(i);
+//            String imageName = modelImagePicked.getId();
+//            String filePathAndName = "Ads/" + firebaseAuth.getUid() + "/" + adId + "/" + imageName;
+//            int imageIndexForProgress = i + 1;
+//            StorageReference storageReference = FirebaseStorage.getInstance().getReference(filePathAndName);
+//
+//            storageReference.putFile(modelImagePicked.getImageUri())
+//                    .addOnProgressListener(snapshot -> {
+//                        double progress = (100.0 * snapshot.getBytesTransferred()) / snapshot.getTotalByteCount();
+//
+//                        String message = "Uploading Image " + imageIndexForProgress + " of " + imagePickedArrayList.size() + " images...\nProgress " + (int) progress + "%";
+//
+//                        Log.d(TAG, "onProgress: message" + message);
+//
+//                        progressDialog.setMessage(message);
+//                        progressDialog.show();
+//                    })
+//                    .addOnSuccessListener(taskSnapshot -> {
+//                        Log.d(TAG, "onSuccess: ");
+//
+//                        Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
+//                        while (!uriTask.isSuccessful());
+//                        Uri uploadedImageUrl = uriTask.getResult();
+//
+//                        if (uriTask.isSuccessful()) {
+//                            HashMap<String, Object> imageHashMap = new HashMap<>();
+//                            imageHashMap.put("id", imageName);
+//                            imageHashMap.put("image", uploadedImageUrl.toString());
+//
+//                            DatabaseReference imagesRef = FirebaseDatabase.getInstance().getReference()
+//                                    .child("Ads").child(firebaseAuth.getUid()).child(adId).child("Images").child(imageName);
+//                            imagesRef.setValue(imageHashMap);
+//                        }
+//
+//                        if (uploadedImagesCounter.incrementAndGet() == totalImagesToUpload) {
+//                            progressDialog.dismiss();
+//                            showAdPublishedDialog();
+//                        }
+//                    })
+//                    .addOnFailureListener(e -> {
+//                        Log.d(TAG, "onFailure: " + e);
+//                        progressDialog.dismiss();
+//                    });
+//        }
+//    }
+//
+
+
+
     private void uploadImagesStorage(String adId) {
         int totalImagesToUpload = imagePickedArrayList.size();
         AtomicInteger uploadedImagesCounter = new AtomicInteger(0);
@@ -368,45 +427,52 @@ public class transact_frag extends Fragment {
             int imageIndexForProgress = i + 1;
             StorageReference storageReference = FirebaseStorage.getInstance().getReference(filePathAndName);
 
-            storageReference.putFile(modelImagePicked.getImageUri())
-                    .addOnProgressListener(snapshot -> {
-                        double progress = (100.0 * snapshot.getBytesTransferred()) / snapshot.getTotalByteCount();
+            try {
+                Bitmap bitmap = MediaStore.Images.Media.getBitmap(requireContext().getContentResolver(), modelImagePicked.getImageUri());
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                bitmap.compress(Bitmap.CompressFormat.JPEG, 15, baos); // Adjust the quality (50 is just an example)
+                byte[] data = baos.toByteArray();
 
-                        String message = "Uploading Image " + imageIndexForProgress + " of " + imagePickedArrayList.size() + " images...\nProgress " + (int) progress + "%";
+                UploadTask uploadTask = storageReference.putBytes(data);
+                uploadTask.addOnProgressListener(snapshot -> {
+                            double progress = (100.0 * snapshot.getBytesTransferred()) / snapshot.getTotalByteCount();
 
-                        Log.d(TAG, "onProgress: message" + message);
+                            String message = "Uploading Image " + imageIndexForProgress + " of " + imagePickedArrayList.size() + " images...\nProgress " + (int) progress + "%";
 
-                        progressDialog.setMessage(message);
-                        progressDialog.show();
-                    })
-                    .addOnSuccessListener(taskSnapshot -> {
-                        Log.d(TAG, "onSuccess: ");
+                            Log.d(TAG, "onProgress: message" + message);
 
-                        Task<Uri> uriTask = taskSnapshot.getStorage().getDownloadUrl();
-                        while (!uriTask.isSuccessful());
-                        Uri uploadedImageUrl = uriTask.getResult();
+                            progressDialog.setMessage(message);
+                            progressDialog.show();
+                        })
+                        .addOnSuccessListener(taskSnapshot -> {
+                            Log.d(TAG, "onSuccess: ");
 
-                        if (uriTask.isSuccessful()) {
-                            HashMap<String, Object> imageHashMap = new HashMap<>();
-                            imageHashMap.put("id", imageName);
-                            imageHashMap.put("image", uploadedImageUrl.toString());
+                            storageReference.getDownloadUrl().addOnSuccessListener(uri -> {
+                                HashMap<String, Object> imageHashMap = new HashMap<>();
+                                imageHashMap.put("id", imageName);
+                                imageHashMap.put("image", uri.toString());
 
-                            DatabaseReference imagesRef = FirebaseDatabase.getInstance().getReference()
-                                    .child("Ads").child(firebaseAuth.getUid()).child(adId).child("Images").child(imageName);
-                            imagesRef.setValue(imageHashMap);
-                        }
+                                DatabaseReference imagesRef = FirebaseDatabase.getInstance().getReference()
+                                        .child("Ads").child(firebaseAuth.getUid()).child(adId).child("Images").child(imageName);
+                                imagesRef.setValue(imageHashMap);
 
-                        if (uploadedImagesCounter.incrementAndGet() == totalImagesToUpload) {
+                                if (uploadedImagesCounter.incrementAndGet() == totalImagesToUpload) {
+                                    progressDialog.dismiss();
+                                    showAdPublishedDialog();
+                                }
+                            });
+                        })
+                        .addOnFailureListener(e -> {
+                            Log.d(TAG, "onFailure: " + e);
                             progressDialog.dismiss();
-                            showAdPublishedDialog();
-                        }
-                    })
-                    .addOnFailureListener(e -> {
-                        Log.d(TAG, "onFailure: " + e);
-                        progressDialog.dismiss();
-                    });
+                        });
+            } catch (IOException e) {
+                e.printStackTrace();
+                progressDialog.dismiss();
+            }
         }
     }
+
 
     private void resetFields() {
         brandEt.getText().clear();
