@@ -48,9 +48,6 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.Viewhold
         holder.binding.priceTxt.setText(item.get("price"));
 
 
-
-
-
         RequestOptions requestOptions = new RequestOptions();
         requestOptions = requestOptions.transform(new CenterCrop());
 
@@ -80,6 +77,7 @@ public class PopularAdapter extends RecyclerView.Adapter<PopularAdapter.Viewhold
                 bundle.putString("condition", item.get("condition")); // Add condition
                 bundle.putString("brand", item.get("brand")); // Add brand
                 bundle.putString("status", item.get("status")); // Add status
+                bundle.putLong("timestamp", Long.parseLong(item.get("timestamp")));
                 adDetailFragment.setArguments(bundle);
                 FragmentManager fragmentManager = ((FragmentActivity) context).getSupportFragmentManager();
                 fragmentManager.beginTransaction()

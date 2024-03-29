@@ -1,11 +1,14 @@
 package com.example.uniwares.Fragments;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -30,6 +33,9 @@ public class explore_frag extends Fragment {
 
     //
     private String selectedCategory;
+
+    private ArrayList<HashMap<String, String>> adsList = new ArrayList<>(); // Define adsList at the class level
+
 
     public explore_frag(String selectedCategory) {
         this.selectedCategory = selectedCategory;
@@ -56,6 +62,14 @@ public class explore_frag extends Fragment {
         View rootView = binding.getRoot();
 
         initPopular();
+
+        binding.textView7.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showFilterDialog();
+            }
+        });
+
         return rootView;
     }
 
@@ -79,6 +93,8 @@ public class explore_frag extends Fragment {
                                 String condition = adSnapshot.child("condition").getValue(String.class); // Add condition
                                 String brand = adSnapshot.child("brand").getValue(String.class); // Add brand
                                 String status = adSnapshot.child("status").getValue(String.class); // Add status
+                                long timestamp = adSnapshot.child("timestamp").getValue(Long.class); // Retrieve timestamp
+
 
                                 // Check if the ad is posted by the current user
                                 if (!uid.equals(FirebaseAuth.getInstance().getCurrentUser().getUid())) {
@@ -111,6 +127,7 @@ public class explore_frag extends Fragment {
                                                 ad.put("condition", condition); // Add condition
                                                 ad.put("brand", brand); // Add brand
                                                 ad.put("status", status); // Add status
+                                                ad.put("timestamp", String.valueOf(timestamp)); // Add timestamp to HashMap
                                                 // Add other fields to the HashMap
 
                                                 adsList.add(ad);
@@ -183,6 +200,32 @@ public class explore_frag extends Fragment {
             }
         });
     }
+
+    private void showFilterDialog() {
+        // Create and show the dialog with sort options/filters
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireContext());
+        builder.setItems(new String[]{"Recently Added", "Price Low to High", "Price High to Low"}, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                switch (which) {
+                    case 0:
+                        // Sort by Recently Added
+                        Toast.makeText(getContext(), "Recently Added", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 1:
+                        // Sort by Price Low to High
+                        Toast.makeText(getContext(), "Low to high", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 2:
+                        // Sort by Price High to Low
+                        Toast.makeText(getContext(), "High to Low", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            }
+        });
+        builder.show();
+    }
+
 
 
 

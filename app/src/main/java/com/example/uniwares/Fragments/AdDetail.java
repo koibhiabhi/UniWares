@@ -8,6 +8,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.request.RequestOptions;
@@ -16,8 +17,11 @@ import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.models.SlideModel;
 import com.example.uniwares.R;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.Locale;
 
 
 public class AdDetail extends Fragment {
@@ -32,6 +36,8 @@ public class AdDetail extends Fragment {
     private String condition;
     private String brand;
     private String status;
+    private long timestamp; // Add timestamp field
+
 
 
 
@@ -55,6 +61,8 @@ public class AdDetail extends Fragment {
             condition = getArguments().getString("condition");
             brand = getArguments().getString("brand");
             status = getArguments().getString("status");
+            timestamp = getArguments().getLong("timestamp"); // Retrieve timestamp
+
         }
     }
 
@@ -76,6 +84,24 @@ public class AdDetail extends Fragment {
             }
         });
 
+
+        ImageView cartImageView = view.findViewById(R.id.cart);
+
+        // Set click listener for the cart ImageView
+        cartImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Navigate to the cart fragment
+                cart_frag cartFragment = new cart_frag();
+                FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.container, cartFragment); // Replace fragment_container with your fragment container id
+                transaction.addToBackStack(null);
+                transaction.commit();
+            }
+        });
+
+
+
         TextView titleTextView = view.findViewById(R.id.text_ad_title);
         TextView priceTextView = view.findViewById(R.id.text_ad_price);
         TextView usernameTextView = view.findViewById(R.id.textAdSellerName);
@@ -87,6 +113,9 @@ public class AdDetail extends Fragment {
 
         TextView productnamehead = view.findViewById(R.id.productnamehead);
         productnamehead.setText(title);
+
+        TextView timestampTextView = view.findViewById(R.id.textAdTimestamp);
+        timestampTextView.setText(formatTimestamp(timestamp));
 
         titleTextView.setText(title);
         priceTextView.setText("Rs. "+price);
@@ -110,6 +139,11 @@ public class AdDetail extends Fragment {
         imageSlider.setImageList(imageList);
 
         return view;
+    }
+
+    private String formatTimestamp(long timestamp) {
+        SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy 'at' hh:mm a", Locale.getDefault());
+        return "Posted " + sdf.format(new Date(timestamp));
     }
 
 }
