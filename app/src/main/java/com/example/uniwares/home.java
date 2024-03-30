@@ -1,21 +1,28 @@
 package com.example.uniwares;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -31,17 +38,25 @@ import com.example.uniwares.Fragments.listing;
 import com.example.uniwares.Fragments.order;
 import com.example.uniwares.Fragments.redeemcoins;
 import com.example.uniwares.Fragments.transact_frag;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.onesignal.Continue;
 import com.onesignal.OneSignal;
 import com.onesignal.debug.LogLevel;
 
+import java.util.HashMap;
 
 
 public class home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
+
+    private static final String TAG = "MAIN_TAG";
 
     private static final String ROOT_FRAGMENT_TAG = "ROOT_FRAGMENT";
     private DrawerLayout drawerLayout;
@@ -203,6 +218,96 @@ public class home extends AppCompatActivity implements NavigationView.OnNavigati
         drawerLayout.closeDrawer(GravityCompat.START);
         return true;
     }
+
+
+
+    private void updateFCMToken(){
+        String myUid = FirebaseAuth.getInstance().getUid();
+        Log.d(TAG, "updateFCMToken: myUid: "+myUid );
+
+
+        FirebaseMessaging.getInstance().getToken()
+                .addOnSuccessListener(new OnSuccessListener<String>() {
+                    @Override
+                    public void onSuccess(String token) {
+                        Log.d(TAG, "onSuccess: token: "+token);
+
+
+                        HashMap<String, Object> hashMap = new HashMap<>();
+                        hashMap.put("fcmToken",token);
+
+                        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("Users");
+
+                        ref.child(myUid)
+                                .updateChildren(hashMap)
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void unused) {
+                                        Log.d(TAG, "updatedFCMToken: onSuccess: ");
+
+
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.d(TAG, "updateFCMToken: onFailure: "+e );
+
+                                    }
+                                });
+
+
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+
+                        Log.d(TAG, "onFailure: "+e );
+
+                    }
+                });
+
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        // Call the updateFCMToken() method here
+        updateFCMToken();
+        askNotificationPermission();
+    }
+
+
+    private void askNotificationPermission(){
+        if (Build.VERSION.SDK_INT >=Build.VERSION_CODES.TIRAMISU){
+
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) == PackageManager.PERMISSION_DENIED){
+
+                requestNotificationPermission.launch(Manifest.permission.POST_NOTIFICATIONS);
+            }
+
+        }
+
+
+    }
+
+
+    private ActivityResultLauncher<String> requestNotificationPermission = registerForActivityResult(
+
+            new ActivityResultContracts.RequestPermission(),
+            new ActivityResultCallback<Boolean>() {
+                @Override
+                public void onActivityResult(Boolean isGranted) {
+
+                    Log.d(TAG, "onActivity: Notification Permission STATUS"+ isGranted);
+
+
+                }
+            }
+    );
+
 }
 
 

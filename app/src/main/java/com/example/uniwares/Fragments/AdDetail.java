@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -21,6 +22,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 
 
@@ -101,6 +103,38 @@ public class AdDetail extends Fragment {
         });
 
 
+        Button addToCartButton = view.findViewById(R.id.addtocart);
+        addToCartButton.setOnClickListener(v -> {
+            HashMap<String, String> cartItem = new HashMap<>();
+            cartItem.put("title", title);
+            cartItem.put("price", price);
+            cartItem.put("imageUrl", imageUrls.get(0)); // Assuming you want to use the first image URL
+            cartItem.put("description", description);
+            cartItem.put("category", category);
+            cartItem.put("condition", condition);
+            cartItem.put("brand", brand);
+            cartItem.put("status", status);
+
+            // Get an instance of the cart_frag and call the addItemToCart method
+            cart_frag cartFragment = new cart_frag();
+            FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+            transaction.replace(R.id.container, cartFragment, "cart_fragment"); // Replace fragment_container with your fragment container id
+            transaction.addToBackStack(null);
+            transaction.commit();
+
+            // Wait for the transaction to be completed before adding the item to the cart
+            requireActivity().getSupportFragmentManager().executePendingTransactions();
+
+            cartFragment.addItemToCart(cartItem);
+
+
+        });
+
+
+
+
+
+
 
         TextView titleTextView = view.findViewById(R.id.text_ad_title);
         TextView priceTextView = view.findViewById(R.id.text_ad_price);
@@ -138,6 +172,22 @@ public class AdDetail extends Fragment {
         }
         imageSlider.setImageList(imageList);
 
+        cart_frag cartFragment = new cart_frag();
+
+        // Get the count of items in the cart
+        int cartItemsCount = cartFragment.getCartItemsCount();
+
+        // Update the countcart TextView
+        TextView countcartTextView = view.findViewById(R.id.countcart);
+        countcartTextView.setText(String.valueOf(cartItemsCount));
+
+
+
+
+
+
+
+
         return view;
     }
 
@@ -145,5 +195,9 @@ public class AdDetail extends Fragment {
         SimpleDateFormat sdf = new SimpleDateFormat("MMM dd, yyyy 'at' hh:mm a", Locale.getDefault());
         return "Posted " + sdf.format(new Date(timestamp));
     }
+
+
+
+
 
 }

@@ -3,8 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
+    android:layout_height="@dimen/_115sdp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView7"
@@ -80,7 +79,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="278dp"
+            android:layout_marginStart="275dp"
             android:layout_marginTop="105dp"
             android:fontFamily="@font/chivoregularvtt"
             android:text="Quantity:"
@@ -103,7 +102,7 @@
             android:id="@+id/removefromcart"
             android:layout_width="24dp"
             android:layout_height="24dp"
-            android:layout_marginStart="@dimen/_267sdp"
+            android:layout_marginStart="@dimen/_265sdp"
             android:layout_marginTop="95.5dp"
             android:padding="1dp"
             android:src="@drawable/trash" />
