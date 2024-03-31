@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
+import com.example.uniwares.Models.OrderModel;
 import com.example.uniwares.NotificationHelper;
 import com.example.uniwares.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,6 +36,7 @@ import com.razorpay.PaymentResultListener;
 
 import org.json.JSONObject;
 
+import java.util.HashMap;
 import java.util.Random;
 
 public class buynow extends Fragment implements PaymentResultListener {
@@ -51,8 +53,13 @@ public class buynow extends Fragment implements PaymentResultListener {
 
 
     private String productTitle;
+    private String sellerName;
+    private String imageUrl;
+    private String price;
 
     String sellerUid;
+
+    private HashMap<String, OrderModel> orderMap = new HashMap<>();
 
 
 
@@ -99,15 +106,17 @@ public class buynow extends Fragment implements PaymentResultListener {
         Bundle args = getArguments();
         if (args != null && args.getBoolean("isBuyNowClicked", false)) {
             String title = args.getString("title");
-            String price = args.getString("price");
+
             sellerUid = args.getString("uid");
             String username = args.getString("username");
-            String imageUrl = args.getString("imageUrl");
+            imageUrl = args.getString("imageUrl");
+            sellerName = args.getString("username");
             String category = args.getString("category");
             String brand = args.getString("brand");
             String status = args.getString("status");
             long timestamp = args.getLong("timestamp");
             productTitle = args.getString("title");
+            price = args.getString("price");
 
 
             // Populate the UI with the ad details
@@ -299,6 +308,7 @@ public class buynow extends Fragment implements PaymentResultListener {
                                 NotificationHelper notificationHelper = new NotificationHelper(getContext());
                                 notificationHelper.sendNotificationToSeller(productTitle, sellerUid);
 
+                                addOrderToMap();
                             } else {
                                 // Show a toast message "Invalid code"
                                 Toast.makeText(getContext(), "Invalid code", Toast.LENGTH_SHORT).show();
@@ -328,6 +338,18 @@ public class buynow extends Fragment implements PaymentResultListener {
 
 
         return view;
+    }
+
+
+    private void addOrderToMap() {
+        String currentUserUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        OrderModel orderModel = new OrderModel(productTitle, price, sellerName, imageUrl, currentUserUid);
+
+        String orderId = FirebaseDatabase.getInstance().getReference().child("Orders").push().getKey();
+        orderMap.put(orderId, orderModel);
+
+        // Save the order details to Firebase Realtime Database
+        FirebaseDatabase.getInstance().getReference().child("Orders").child(orderId).setValue(orderModel);
     }
 
 
@@ -385,16 +407,22 @@ public class buynow extends Fragment implements PaymentResultListener {
             options.put("prefill", prefill);
 
             checkout.open(requireActivity(), options); // Use buynow.this instead of this
+
+            addOrderToMap();
         } catch (Exception e) {
             Toast.makeText(getActivity(), "Error in Payment" + e.getMessage(), Toast.LENGTH_SHORT).show();
             e.printStackTrace();
 
         }
 
+
     }
 
     @Override
     public void onPaymentSuccess(String s) {
+
+
+
         Toast.makeText(getContext(), "Payment Success: " + s, Toast.LENGTH_SHORT).show();
     }
 

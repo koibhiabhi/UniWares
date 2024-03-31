@@ -445,7 +445,7 @@
             android:fontFamily="@font/chivoregularvtt"
             android:text="0000"
             android:textAlignment="textStart"
-            android:inputType="number"
+            android:inputType="numberDecimal"
             android:background="@android:color/transparent"
             android:textColor="#9A9A9A"
             android:textSize="35sp" />

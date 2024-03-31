@@ -12,4 +12,5 @@
     <!-- strings.xml -->
     <string name="channel_name">Order Notifications</string>
     <string name="channel_description">Notifications for new orders and order updates</string>
+    <string name="rs_price">Rs. %1$s</string>
 </resources>

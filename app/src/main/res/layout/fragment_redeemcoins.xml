@@ -131,7 +131,7 @@
                 <ImageView
                     android:layout_width="24dp"
                     android:layout_height="24dp"
-                    android:layout_marginLeft="@dimen/_90sdp"
+                    android:layout_marginLeft="@dimen/_100sdp"
                     android:layout_marginTop="-33dp"
                     android:src="@drawable/coin" />
             </androidx.appcompat.widget.LinearLayoutCompat>
