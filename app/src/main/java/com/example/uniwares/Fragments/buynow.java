@@ -33,7 +33,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Random;
@@ -363,7 +362,7 @@ public class buynow extends Fragment implements PaymentResultListener {
 
     public void startPayment() {
         Checkout checkout = new Checkout();
-        checkout.setImage(R.mipmap.ic_launcher);
+        checkout.setImage(R.drawable.logo);
         final Activity activity = requireActivity();
         //final Fragment fragment = this;
 
@@ -403,7 +402,6 @@ public class buynow extends Fragment implements PaymentResultListener {
     public void onPaymentError(int i, String s) {
         Toast.makeText(getContext(), "Payment Error: " + s, Toast.LENGTH_SHORT).show();
     }
-
 
 
 }

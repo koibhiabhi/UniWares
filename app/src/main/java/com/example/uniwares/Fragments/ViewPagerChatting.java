@@ -34,7 +34,7 @@ public class ViewPagerChatting extends FragmentPagerAdapter {
         if (position == 0) {
             return "Chat";
         }  else {
-            return "Notification";
+            return "Chat with UniBuddy";
         }
     }
 }

@@ -8,13 +8,69 @@
     tools:context=".Fragments.fragnotif">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+
+    <app.rive.runtime.kotlin.RiveAnimationView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/hello_blank_fragment"
+        android:layout_marginStart="72dp"
+        android:layout_marginTop="280dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:riveAutoPlay="true"
+        app:riveResource="@raw/new_file" />
+
+
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieAnimationView2"
+        android:layout_width="173dp"
+        android:layout_height="157dp"
+        android:layout_marginTop="156dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_rawRes="@raw/chatt" />
+
+    <Button
+        android:id="@+id/chatbot"
+        android:layout_width="195dp"
+        android:layout_height="168dp"
+        android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.263" />
+
+
+    <ImageView
+        android:layout_width="123dp"
+        android:layout_height="140dp"
+        android:src="@drawable/clickhere"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.473" />
+
+
+    <TextView
+        android:layout_width="329dp"
+        android:layout_height="72dp"
+        android:fontFamily="sans-serif-black"
+        android:text="Supercharge your customer service experience with our chatbot UniBuddy! "
+        android:textColor="#FFFF5858"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.195"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.01" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
