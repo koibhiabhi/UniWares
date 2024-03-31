@@ -1,5 +1,6 @@
 package com.example.uniwares.Fragments;
 
+import android.app.Activity;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -29,10 +30,15 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.razorpay.Checkout;
+import com.razorpay.PaymentResultListener;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Random;
 
-public class buynow extends Fragment {
+public class buynow extends Fragment implements PaymentResultListener {
 
     private DatabaseReference userRef;
     private TextView addressTextView;
@@ -41,6 +47,8 @@ public class buynow extends Fragment {
     private TextView codegen;
     private EditText coderead;
     private int tempCode;
+
+    private TextView amt;
 
 
     private String productTitle;
@@ -67,6 +75,7 @@ public class buynow extends Fragment {
         cashond = view.findViewById(R.id.cashond);
         codegen = view.findViewById(R.id.codegen);
         coderead = view.findViewById(R.id.coderead);
+        amt = view.findViewById(R.id.totalsum);
 
         RadioButton cod1 = view.findViewById(R.id.cod);
 
@@ -100,6 +109,7 @@ public class buynow extends Fragment {
             String status = args.getString("status");
             long timestamp = args.getLong("timestamp");
             productTitle = args.getString("title");
+
 
             // Populate the UI with the ad details
             TextView titleTextView = view.findViewById(R.id.title);
@@ -306,8 +316,7 @@ public class buynow extends Fragment {
                     placeOrder.setOnClickListener(new View.OnClickListener() {
                         @Override
                         public void onClick(View view) {
-                            //
-                            Toast.makeText(getContext(),"Payment Successful", Toast.LENGTH_SHORT).show();
+                            startPayment();
                         }
                     });
                     cashond.setVisibility(View.GONE);
@@ -321,6 +330,7 @@ public class buynow extends Fragment {
 
         return view;
     }
+
 
 
 
@@ -351,6 +361,49 @@ public class buynow extends Fragment {
         });
     }
 
+    public void startPayment() {
+        Checkout checkout = new Checkout();
+        checkout.setImage(R.mipmap.ic_launcher);
+        final Activity activity = requireActivity();
+        //final Fragment fragment = this;
+
+
+        try {
+            String amountStr = amt.getText().toString().replaceAll("\\D+", "");
+            int amount = Integer.parseInt(amountStr);
+            JSONObject options = new JSONObject();
+            options.put("name", getString(R.string.app_name)); // Use getString() to get String resources
+            options.put("description", "Payment for anything");
+            options.put("send_sns_hash", true);
+            options.put("allow rotation", false);
+            options.put("currency", "INR");
+            options.put("amount", amount * 100);
+
+            JSONObject prefill = new JSONObject();
+            prefill.put("Email", "test@gmail.com");
+            prefill.put("contact", "7854236985");
+
+            options.put("prefill", prefill);
+
+            checkout.open(requireActivity(), options); // Use buynow.this instead of this
+        } catch (Exception e) {
+            Toast.makeText(getActivity(), "Error in Payment" + e.getMessage(), Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+
+        }
+
+    }
+
+    @Override
+    public void onPaymentSuccess(String s) {
+        Toast.makeText(getContext(), "Payment Success: " + s, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onPaymentError(int i, String s) {
+        Toast.makeText(getContext(), "Payment Error: " + s, Toast.LENGTH_SHORT).show();
+    }
+
 
 
 }
@@ -358,45 +411,4 @@ public class buynow extends Fragment {
 
 
 
-//
-//
-//    private void sendNotificationToSeller() {
-//        // Get current user's ID
-//        String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-//
-//        // Get reference to the current user's node in the database
-//        DatabaseReference currentUserRef = FirebaseDatabase.getInstance().getReference().child("users").child(currentUserId);
-//
-//        // Retrieve the current user's username
-//        currentUserRef.addListenerForSingleValueEvent(new ValueEventListener() {
-//            @Override
-//            public void onDataChange(@NonNull DataSnapshot snapshot)  {
-//                if (snapshot.exists()) {
-//                    String buyerName = snapshot.child("username").getValue(String.class);
-//
-//                    // Create a data payload for the notification
-//                    Map<String, String> data = new HashMap<>();
-//                    data.put("title", "New Purchase Request");
-//                    data.put("body", "Buyer " + buyerName + " wants to buy your product " + productName);
-//
-//                    // Create a notification message
-//                    RemoteMessage.Builder builder = new RemoteMessage.Builder(sellerFCMToken);
-//                    for (Map.Entry<String, String> entry : data.entrySet()) {
-//                        builder.addData(entry.getKey(), entry.getValue());
-//                    }
-//                    RemoteMessage message = builder.build();
-//
-//                    // Send the notification
-//                    FirebaseMessaging.getInstance().send(message);
-//                    // Show a toast message "Notification sent"
-//                    Toast.makeText(getContext(), "Notification sent to seller", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onCancelled(@NonNull DatabaseError error) {
-//                // Handle onCancelled
-//            }
-//        });
-//    }
-//
+

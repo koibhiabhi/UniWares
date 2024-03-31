@@ -8,6 +8,7 @@ android {
     namespace = "com.example.uniwares"
     compileSdk = 34
 
+
     defaultConfig {
         applicationId = "com.example.uniwares"
         minSdk = 21
@@ -69,4 +70,5 @@ dependencies {
     annotationProcessor ("com.github.bumptech.glide:compiler:4.11.0")
     implementation("com.squareup.picasso:picasso:2.71828")
     implementation ("com.onesignal:OneSignal:[5.0.0, 5.99.99]")
+    implementation ("com.razorpay:checkout:1.6.15")
 }

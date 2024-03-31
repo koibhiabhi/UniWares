@@ -51,9 +51,10 @@ import com.onesignal.OneSignal;
 import com.onesignal.debug.LogLevel;
 
 import java.util.HashMap;
+import com.razorpay.PaymentResultListener;
 
 
-public class home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class home extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener,PaymentResultListener {
 
 
     private static final String TAG = "MAIN_TAG";
@@ -308,6 +309,16 @@ public class home extends AppCompatActivity implements NavigationView.OnNavigati
             }
     );
 
+    @Override
+    public void onPaymentSuccess(String s) {
+        Toast.makeText(this, "Payment Success: " + s, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onPaymentError(int i, String s) {
+        Toast.makeText(this, "Payment Error!"+s, Toast.LENGTH_SHORT).show();
+
+    }
 }
 
 
