@@ -84,6 +84,8 @@ public class explore_frag extends Fragment {
                 if (snapshot.exists()) {
                     for (DataSnapshot userSnapshot : snapshot.getChildren()) {
                         for (DataSnapshot adSnapshot : userSnapshot.getChildren()) {
+                            String adId = adSnapshot.getKey();
+                            // Retrieve adId from the adSnapshot key
                             String category = adSnapshot.child("category").getValue(String.class);
                             if (selectedCategory == null || selectedCategory.isEmpty() || (category != null && category.equals(selectedCategory))) {
                                 String title = adSnapshot.child("title").getValue(String.class);
@@ -118,6 +120,7 @@ public class explore_frag extends Fragment {
 
                                                 // Add ad details to HashMap
                                                 HashMap<String, String> ad = new HashMap<>();
+                                                ad.put("adId", adId); // Add adId to HashMap
                                                 ad.put("title", title);
                                                 ad.put("price", price);
                                                 ad.put("username", username);
@@ -127,7 +130,7 @@ public class explore_frag extends Fragment {
                                                 ad.put("condition", condition); // Add condition
                                                 ad.put("brand", brand); // Add brand
                                                 ad.put("status", status); // Add status
-                                                ad.put("timestamp", String.valueOf(timestamp)); // Add timestamp to HashMap
+                                                ad.put("timestamp", String.valueOf(timestamp));// Add timestamp to HashMap
                                                 // Add other fields to the HashMap
 
                                                 adsList.add(ad);

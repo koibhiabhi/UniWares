@@ -1,6 +1,7 @@
 package com.example.uniwares.Fragments;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ import java.util.Locale;
 
 public class AdDetail extends Fragment {
 
+    private static final String TAG = "MAIN";
     private String title;
     private String price;
     private String username;
@@ -39,6 +41,9 @@ public class AdDetail extends Fragment {
     private String brand;
     private String status;
     private long timestamp; // Add timestamp field
+    private String uid;
+
+    String adId;
 
 
 
@@ -51,8 +56,10 @@ public class AdDetail extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
+            adId = getArguments().getString("adId");
             title = getArguments().getString("title");
             price = getArguments().getString("price");
+            uid = getArguments().getString("uid");
             username = getArguments().getString("username");
             String imageUrlString = getArguments().getString("imageUrl");
             if (imageUrlString != null) {
@@ -106,6 +113,9 @@ public class AdDetail extends Fragment {
         Button addToCartButton = view.findViewById(R.id.addtocart);
         addToCartButton.setOnClickListener(v -> {
             HashMap<String, String> cartItem = new HashMap<>();
+            Log.d(TAG,"On AdIdSuccessful: "+adId );
+            cartItem.put("adId",  adId);
+            Log.d(TAG,"On AdIdSuccessful: "+adId  );
             cartItem.put("title", title);
             cartItem.put("price", price);
             cartItem.put("imageUrl", imageUrls.get(0)); // Assuming you want to use the first image URL
@@ -114,6 +124,7 @@ public class AdDetail extends Fragment {
             cartItem.put("condition", condition);
             cartItem.put("brand", brand);
             cartItem.put("status", status);
+
 
             // Get an instance of the cart_frag and call the addItemToCart method
             cart_frag cartFragment = new cart_frag();
@@ -181,6 +192,43 @@ public class AdDetail extends Fragment {
         TextView countcartTextView = view.findViewById(R.id.countcart);
         countcartTextView.setText(String.valueOf(cartItemsCount));
 
+
+
+        Button buyNowButton = view.findViewById(R.id.buynow);
+        buyNowButton.setOnClickListener(new View.OnClickListener() {
+            private static final String TAG = "Buying Add";
+
+            @Override
+            public void onClick(View v) {
+                // Create a new instance of the buynow fragment
+                buynow buyNowFragment = new buynow();
+
+                // Pass data to the buynow fragment using arguments
+                Bundle args = new Bundle();
+                args.putBoolean("isBuyNowClicked", true); // Pass a flag indicating the buy now button is clicked
+                args.putString("adId", adId);
+                args.putString("uid", uid);
+                Log.d(TAG, "On AdIdSuccessful: " + adId);
+                args.putString("title", title);
+                args.putString("price", price);
+                args.putString("username", username);
+                args.putString("imageUrl", imageUrls.get(0));
+                args.putString("category", category);
+                args.putString("brand", brand);
+                args.putString("status", status);
+                args.putLong("timestamp", timestamp);
+                //args.putString("adId", adId); // Assuming adId is the variable holding your ad's ID
+
+                buyNowFragment.setArguments(args);
+
+                // Replace the current fragment with the buynow fragment
+                FragmentTransaction transaction = requireActivity().getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.container, buyNowFragment); // Replace fragment_container with your fragment container id
+                transaction.addToBackStack(null);
+                transaction.commit();
+
+            }
+        });
 
 
 

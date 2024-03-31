@@ -8,8 +8,6 @@
     tools:context=".Fragments.AdDetail">
 
 
-
-
         <LinearLayout
             android:id="@+id/ll"
             android:layout_width="match_parent"
@@ -82,7 +80,8 @@
                 android:padding="1dp"
                 android:gravity="center"
                 android:layout_gravity="center"
-                android:textSize="9sp" />
+                android:textSize="9sp"
+                android:visibility="gone"/>
 
             </androidx.cardview.widget.CardView>
 
@@ -368,25 +367,23 @@
 
         <Button
             android:id="@+id/addtocart"
-            android:layout_width="wrap_content"
+            android:layout_width="207dp"
             android:layout_height="50dp"
-            android:layout_weight="1"
             android:backgroundTint="@android:color/transparent"
             android:text="Add to Cart"
             android:textColor="#FF5A5F"
             app:cornerRadius="0dp"
-            app:strokeWidth="1dp"
-            app:strokeColor = "#FF5A5F"/>
+            app:strokeColor="#FF5A5F"
+            app:strokeWidth="1dp" />
 
         <Button
             android:id="@+id/buynow"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
             android:layout_weight="1"
-            android:text="Buy Now"
             android:backgroundTint="#FF5A5F"
+            android:text="Buy Now"
             app:cornerRadius="0dp" />
-
 
 
     </LinearLayout>
